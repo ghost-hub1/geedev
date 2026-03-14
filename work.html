@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work - GEE.DEV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=Outfit:wght@200;300;400;500;600;700;800;900&family=Fragment+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#faf8f5;--bg2:#f2eeea;--surface:#fff;--surface2:#f7f5f2;--surface3:#ede9e4;
+--accent:#c62828;--accent2:#b71c1c;--accent-b:#e53935;
+--accent-dim:rgba(198,40,40,.04);--accent-mid:rgba(198,40,40,.1);--accent-glow:rgba(198,40,40,.08);
+--warm:#c4956a;--mint:#2e7d32;--mint-dim:rgba(46,125,50,.05);--amber:#ef6c00;--amber-dim:rgba(239,108,0,.05);--pink:#ad1457;--pink-dim:rgba(173,20,87,.05);--sky:#0277bd;--sky-dim:rgba(2,119,189,.05);--gold:#f9a825;
+--text:#1a1714;--text2:#6b6560;--text3:#9e9890;--text4:#c4beb6;
+--border:rgba(0,0,0,.06);--border2:rgba(0,0,0,.1);--border3:rgba(0,0,0,.15);--border-h:rgba(198,40,40,.18);
+--shadow-sm:0 2px 8px rgba(0,0,0,.04);--shadow-md:0 8px 24px rgba(0,0,0,.06);--shadow-lg:0 20px 48px rgba(0,0,0,.08);--shadow-xl:0 32px 72px rgba(0,0,0,.1);
+--nav-bg:rgba(250,248,245,.92);
+--fd:'Fraunces',serif;--fb:'Outfit',sans-serif;--fm:'Fragment Mono',monospace;
+--r:16px;--rx:24px;--ease:cubic-bezier(.23,1,.32,1);
+}
+[data-theme="dark"]{
+--bg:#0e0d10;--bg2:#141318;--surface:#18171e;--surface2:#1e1d26;--surface3:#26252e;
+--accent:#ef5350;--accent2:#e53935;--accent-b:#ff6b6b;
+--accent-dim:rgba(239,83,80,.05);--accent-mid:rgba(239,83,80,.12);--accent-glow:rgba(239,83,80,.1);
+--text:#e8e4e0;--text2:#8a8680;--text3:#5a5650;--text4:#3a3630;
+--border:rgba(255,255,255,.05);--border2:rgba(255,255,255,.08);--border3:rgba(255,255,255,.12);--border-h:rgba(239,83,80,.2);
+--shadow-sm:0 2px 8px rgba(0,0,0,.15);--shadow-md:0 8px 24px rgba(0,0,0,.2);--shadow-lg:0 20px 48px rgba(0,0,0,.25);--shadow-xl:0 32px 72px rgba(0,0,0,.3);
+--nav-bg:rgba(14,13,16,.92);
+}
+html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:16px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background .5s,color .4s}::selection{background:var(--accent);color:#fff}a{color:inherit;text-decoration:none}.container{max-width:1280px;margin:0 auto;padding:0 52px}
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px 0;background:var(--nav-bg);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border);transition:padding .4s,box-shadow .3s}.nav.scrolled{padding:12px 0;box-shadow:var(--shadow-sm)}.nav-inner{max-width:1280px;margin:0 auto;padding:0 52px;display:flex;align-items:center;justify-content:space-between}.nav-logo{display:flex;align-items:center;gap:12px}.nav-logo-icon{width:40px;height:40px;border-radius:10px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px;color:#fff;box-shadow:0 4px 16px var(--accent-glow);transition:transform .4s;position:relative;overflow:hidden}.nav-logo-icon::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.15),transparent)}.nav-logo:hover .nav-logo-icon{transform:rotate(-6deg) scale(1.08)}.nav-logo-text{font-weight:800;font-size:18px}.nav-links{display:flex;gap:4px;list-style:none}.nav-links a{font-size:14px;font-weight:600;color:var(--text2);padding:9px 18px;border-radius:10px;transition:all .3s}.nav-links a:hover{color:var(--text);background:var(--accent-dim)}.nav-links a.active{color:var(--accent);background:var(--accent-dim)}.nav-right{display:flex;align-items:center;gap:10px}.nav-hire{padding:11px 26px;background:var(--accent);color:#fff;border-radius:100px;font-weight:700;font-size:13px;transition:all .4s;box-shadow:0 3px 12px var(--accent-glow);position:relative;overflow:hidden}.nav-hire::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.1),transparent)}.nav-hire:hover{background:var(--accent2);transform:translateY(-1px)}.theme-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--border2);background:var(--surface);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;font-size:18px}.theme-btn:hover{border-color:var(--accent-mid);transform:scale(1.08)}.hamburger{display:none;width:42px;height:42px;border-radius:10px;border:1px solid var(--border2);background:var(--surface);align-items:center;justify-content:center;cursor:pointer;flex-direction:column;gap:5px;padding:12px}.hamburger span{display:block;width:100%;height:2px;background:var(--text);border-radius:2px}
+/* HERO */
+.page-hero{padding:160px 0 80px;text-align:center;position:relative}.page-hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:800px;height:500px;background:radial-gradient(ellipse,var(--accent-dim),transparent 60%);pointer-events:none}
+.ph-tag{display:inline-flex;align-items:center;gap:10px;font-family:var(--fm);font-size:11px;color:var(--accent);letter-spacing:.14em;text-transform:uppercase;margin-bottom:20px;position:relative}.ph-tag::before{content:'';width:32px;height:2px;background:var(--accent);border-radius:2px}
+.ph-title{font-family:var(--fd);font-size:clamp(40px,5.5vw,64px);font-weight:300;line-height:1.05;letter-spacing:-.03em;margin-bottom:16px;position:relative}.ph-title em{font-style:italic;color:var(--accent)}
+.ph-sub{font-size:18px;color:var(--text2);max-width:520px;margin:0 auto;line-height:1.85;font-weight:300;position:relative}
+/* FILTER */
+.filter-bar{display:flex;justify-content:center;gap:6px;margin-bottom:48px;flex-wrap:wrap}
+.fbtn{padding:10px 22px;border-radius:100px;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:all .4s;border:1px solid var(--border);color:var(--text2);background:transparent}.fbtn:hover{border-color:var(--accent-mid);color:var(--accent)}.fbtn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+/* PROJECT CARDS */
+.proj-list{display:flex;flex-direction:column;gap:24px}
+.proj{background:var(--surface);border:1px solid var(--border);border-radius:var(--rx);overflow:hidden;display:grid;grid-template-columns:1fr 1fr;transition:all .5s var(--ease)}
+.proj:hover{border-color:var(--border-h);transform:translateY(-3px);box-shadow:var(--shadow-xl)}
+.proj:nth-child(even){direction:rtl}.proj:nth-child(even)>*{direction:ltr}
+.proj-vis{padding:36px;display:flex;align-items:center;justify-content:center;position:relative;min-height:320px;overflow:hidden}
+.proj-vis-bg{position:absolute;inset:0;transition:transform .6s var(--ease)}.proj:hover .proj-vis-bg{transform:scale(1.03)}
+.proj-badge{position:absolute;top:16px;right:16px;z-index:2}
+.tag{padding:5px 14px;border-radius:100px;font-family:var(--fm);font-size:10px;background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent-mid)}
+.tag-n{background:var(--surface2);color:var(--text3);border-color:var(--border)}
+/* Browser mockup */
+.pm{position:relative;z-index:1;width:80%;max-width:300px}
+.pm-b{background:var(--surface2);border:1px solid rgba(255,255,255,.06);border-radius:10px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.12)}
+.pm-bar{padding:8px 12px;display:flex;align-items:center;gap:5px;border-bottom:1px solid rgba(255,255,255,.04);background:rgba(0,0,0,.02)}
+.pm-d{width:6px;height:6px;border-radius:50%}.dr{background:#ff5f57}.dy{background:#febc2e}.dg{background:#28c840}
+.pm-url{margin-left:8px;flex:1;height:18px;border-radius:4px;background:rgba(0,0,0,.04);font-family:var(--fm);font-size:8px;color:var(--text4);display:flex;align-items:center;padding:0 8px}
+[data-theme="dark"] .pm-url{background:rgba(255,255,255,.04)}
+.pm-s{aspect-ratio:16/10;padding:12px;display:flex;flex-direction:column;gap:5px}
+.mock-h{height:24px;background:rgba(0,0,0,.04);border-radius:4px}[data-theme="dark"] .mock-h{background:rgba(255,255,255,.03)}
+.mock-n{height:5px;width:50%;background:rgba(0,0,0,.03);border-radius:100px}[data-theme="dark"] .mock-n{background:rgba(255,255,255,.02)}
+.mock-hero{height:44px;border-radius:6px}
+.mock-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;height:28px}.mock-grid div{border-radius:4px;background:rgba(0,0,0,.03)}[data-theme="dark"] .mock-grid div{background:rgba(255,255,255,.02)}
+.mock-t{height:4px;background:rgba(0,0,0,.03);border-radius:100px}[data-theme="dark"] .mock-t{background:rgba(255,255,255,.02)}.mock-ts{width:55%}
+/* Widget mockup */
+.pw{position:relative;z-index:1;width:180px}
+.pw-c{background:rgba(20,20,30,.85);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:18px;font-family:var(--fm)}
+.pw-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.pw-tl{font-size:8px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.4)}.pw-bd{font-size:7px;padding:2px 7px;border-radius:100px}
+.pw-v{font-size:24px;font-weight:700;font-family:var(--fb);color:#fff;margin-bottom:2px}.pw-sm{font-size:8px;color:rgba(255,255,255,.3);margin-bottom:10px}
+.pw-br{height:4px;border-radius:100px;background:rgba(255,255,255,.04);overflow:hidden;margin-bottom:10px}.pw-bf{height:100%;border-radius:100px}
+.pw-sts{display:grid;grid-template-columns:1fr 1fr;gap:6px}.pw-st{background:rgba(255,255,255,.03);border-radius:7px;padding:7px}.pw-stv{font-size:11px;font-weight:600;font-family:var(--fb);color:#fff}.pw-stl{font-size:7px;color:rgba(255,255,255,.3);margin-top:1px}
+/* Proj info */
+.proj-info{padding:40px 36px;display:flex;flex-direction:column;justify-content:center}
+.proj-type{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:14px}
+.proj-title{font-family:var(--fd);font-size:clamp(22px,2.5vw,30px);font-weight:500;margin-bottom:12px;line-height:1.15}
+.proj-desc{font-size:14.5px;color:var(--text2);line-height:1.8;margin-bottom:20px;font-weight:300}
+.proj-tech{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:22px}
+.proj-results{display:flex;gap:24px;flex-wrap:wrap}
+.pr-v{font-family:var(--fm);font-size:14px;color:var(--accent)}.pr-l{font-size:11px;color:var(--text3);margin-top:2px}
+
+/* CTA */
+.btn-p{display:inline-flex;align-items:center;gap:10px;padding:17px 38px;background:var(--accent);color:#fff;border-radius:100px;font-weight:700;font-size:15px;transition:all .4s;box-shadow:0 4px 20px var(--accent-glow);border:none;cursor:pointer;font-family:var(--fb);position:relative;overflow:hidden}.btn-p::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.12),transparent)}.btn-p:hover{background:var(--accent2);transform:translateY(-2px)}.btn-p svg{width:17px;height:17px}
+
+/* FOOTER */
+.footer{padding:80px 0 40px;border-top:1px solid var(--border);background:var(--surface);transition:all .4s}.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:44px;margin-bottom:52px}.footer-brand{display:flex;align-items:center;gap:10px;margin-bottom:16px}.footer-brand-icon{width:32px;height:32px;border-radius:8px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;color:#fff}.footer-brand-text{font-weight:800;font-size:17px}.footer-desc{font-size:14px;color:var(--text3);line-height:1.7;max-width:280px;margin-bottom:16px}.footer-social{display:flex;gap:10px}.footer-social a{width:38px;height:38px;border-radius:10px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--text3);transition:all .3s}.footer-social a:hover{background:var(--accent-dim);border-color:var(--accent-mid);color:var(--accent)}.footer-social a.off{pointer-events:none;opacity:.3}.footer-title{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text2);margin-bottom:18px}.footer-link{display:block;font-size:14px;color:var(--text3);padding:5px 0;transition:color .3s}.footer-link:hover{color:var(--accent)}.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;border-top:1px solid var(--border)}.footer-copy{font-family:var(--fm);font-size:11px;color:var(--text4)}
+
+@media(max-width:1100px){.container{padding:0 36px}.nav-inner{padding:0 36px}.proj{grid-template-columns:1fr}.proj:nth-child(even){direction:ltr}.proj-vis{min-height:240px}.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.container{padding:0 20px}.nav-inner{padding:0 20px}.nav-links,.nav-hire{display:none}.hamburger{display:flex}.page-hero{padding:130px 0 60px}.proj-info{padding:24px 20px}.footer-grid{grid-template-columns:1fr}.footer-bottom{flex-direction:column;gap:14px;text-align:center}}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav"><div class="nav-inner">
+<a href="index.html" class="nav-logo"><div class="nav-logo-icon">G</div><span class="nav-logo-text">GEE.DEV</span></a>
+<ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="services.html">Services</a></li><li><a href="work.html" class="active">Work</a></li><li><a href="about.html">About</a></li></ul>
+<div class="nav-right"><button class="theme-btn" id="themeBtn" title="Toggle theme"><span class="theme-icon">🌙</span></button><a href="contact.html" class="nav-hire">Hire Me</a><button class="hamburger" id="burger"><span></span><span></span><span></span></button></div>
+</div></nav>
+
+<section class="page-hero"><div class="container">
+<div class="ph-tag" style="justify-content:center">Portfolio</div>
+<h1 class="ph-title">Work that speaks<br>for <em>itself.</em></h1>
+<p class="ph-sub">Every project built from scratch. No templates. No shortcuts. Just clean code, modern design, and real results.</p>
+</div></section>
+
+<section style="padding:0 0 120px"><div class="container">
+
+<div class="filter-bar">
+<span class="fbtn active" onclick="filt('all',this)">All Projects</span>
+<span class="fbtn" onclick="filt('web',this)">Websites</span>
+<span class="fbtn" onclick="filt('app',this)">Web Apps</span>
+<span class="fbtn" onclick="filt('widget',this)">iOS Widgets</span>
+</div>
+
+<div class="proj-list" id="projList">
+
+<!-- 1. MERIDIAN -->
+<div class="proj" data-cat="web">
+<div class="proj-vis"><div class="proj-vis-bg" style="background:linear-gradient(135deg,#1a1a2e,#16213e,#1a1a30)"></div><div class="proj-badge tag">Landing Page</div><div class="pm"><div class="pm-b"><div class="pm-bar"><div class="pm-d dr"></div><div class="pm-d dy"></div><div class="pm-d dg"></div><div class="pm-url">meridianstudio.com</div></div><div class="pm-s"><div class="mock-h"></div><div class="mock-n"></div><div class="mock-hero" style="background:linear-gradient(135deg,rgba(200,255,0,.06),rgba(100,100,200,.04))"></div><div class="mock-t"></div><div class="mock-t mock-ts"></div><div class="mock-grid"><div></div><div></div><div></div></div></div></div></div></div>
+<div class="proj-info"><div class="proj-type">Website · 2026</div><h3 class="proj-title">Meridian Studio — Digital Agency</h3><p class="proj-desc">Premium landing page with custom cursor, preloader, infinite marquee, animated counters, staggered scroll reveals, and grain texture. Dark theme with electric green accents.</p><div class="proj-tech"><span class="tag-n tag">HTML/CSS</span><span class="tag-n tag">JavaScript</span><span class="tag-n tag">Animations</span></div><div class="proj-results"><div><div class="pr-v">100%</div><div class="pr-l">Responsive</div></div><div><div class="pr-v">Custom Cursor</div><div class="pr-l">Desktop</div></div><div><div class="pr-v">&lt;1.5s</div><div class="pr-l">Load Time</div></div></div></div>
+</div>
+
+<!-- 2. NOURI -->
+<div class="proj" data-cat="web">
+<div class="proj-vis"><div class="proj-vis-bg" style="background:linear-gradient(135deg,#1a1610,#2a2318,#201c14)"></div><div class="proj-badge tag">4 Pages</div><div class="pm"><div class="pm-b"><div class="pm-bar"><div class="pm-d dr"></div><div class="pm-d dy"></div><div class="pm-d dg"></div><div class="pm-url">nouri-restaurant.com</div></div><div class="pm-s"><div class="mock-h" style="background:rgba(201,169,110,.06)"></div><div class="mock-hero" style="height:52px;background:linear-gradient(135deg,rgba(201,169,110,.06),rgba(122,140,98,.04))"></div><div class="mock-t" style="width:45%;margin:0 auto"></div><div class="mock-grid"><div></div><div></div><div></div></div></div></div></div></div>
+<div class="proj-info"><div class="proj-type">Full Website · 2026</div><h3 class="proj-title">Nouri — Mediterranean Restaurant</h3><p class="proj-desc">Full 4-page restaurant website. Home, Menu (5 category tabs, 30+ items), Our Story, and Reservations with working booking form. Smooth page transitions, gold accent theme.</p><div class="proj-tech"><span class="tag-n tag">SPA</span><span class="tag-n tag">Router</span><span class="tag-n tag">Forms</span></div><div class="proj-results"><div><div class="pr-v">4 Pages</div><div class="pr-l">Full Site</div></div><div><div class="pr-v">5 Tabs</div><div class="pr-l">30+ Items</div></div><div><div class="pr-v">Booking</div><div class="pr-l">Working Form</div></div></div></div>
+</div>
+
+<!-- 3. AURA -->
+<div class="proj" data-cat="web">
+<div class="proj-vis"><div class="proj-vis-bg" style="background:linear-gradient(135deg,#171412,#1c1917,#201d1a)"></div><div class="proj-badge tag">E-Commerce</div><div class="pm"><div class="pm-b"><div class="pm-bar"><div class="pm-d dr"></div><div class="pm-d dy"></div><div class="pm-d dg"></div><div class="pm-url">aura-audio.com</div></div><div class="pm-s" style="flex-direction:row"><div style="flex:1;background:rgba(0,0,0,.04);border-radius:5px;margin-right:5px"></div><div style="flex:1;display:flex;flex-direction:column;gap:3px;padding:5px"><div class="mock-t" style="width:35%"></div><div class="mock-t" style="height:7px"></div><div class="mock-t mock-ts"></div><div style="height:16px;width:56px;border-radius:100px;background:rgba(0,0,0,.04);margin-top:auto"></div></div></div></div></div></div>
+<div class="proj-info"><div class="proj-type">Online Store · 2026</div><h3 class="proj-title">Aura Audio — E-Commerce Platform</h3><p class="proj-desc">2-view e-commerce store with storefront and product detail. Working add-to-cart with badge counter, 4-color picker, thumbnail gallery, quantity controls, and customer reviews.</p><div class="proj-tech"><span class="tag-n tag">SPA</span><span class="tag-n tag">Cart</span><span class="tag-n tag">State Mgmt</span></div><div class="proj-results"><div><div class="pr-v">2 Views</div><div class="pr-l">Store + Detail</div></div><div><div class="pr-v">Cart</div><div class="pr-l">Working</div></div><div><div class="pr-v">4 Colors</div><div class="pr-l">Picker</div></div></div></div>
+</div>
+
+<!-- 4. PULSE -->
+<div class="proj" data-cat="app">
+<div class="proj-vis"><div class="proj-vis-bg" style="background:linear-gradient(135deg,#0f0f1a,#141420,#18182a)"></div><div class="proj-badge tag">Dashboard</div><div class="pm"><div class="pm-b"><div class="pm-bar"><div class="pm-d dr"></div><div class="pm-d dy"></div><div class="pm-d dg"></div><div class="pm-url">pulse-analytics.app</div></div><div class="pm-s" style="flex-direction:row"><div style="width:25%;background:rgba(255,255,255,.02);border-radius:4px;margin-right:4px;padding:4px"><div style="height:3px;border-radius:2px;background:rgba(129,140,248,.1);width:70%;margin-bottom:3px"></div><div style="height:2px;border-radius:2px;background:rgba(255,255,255,.03);width:60%;margin-bottom:2px"></div><div style="height:2px;border-radius:2px;background:rgba(255,255,255,.03);width:50%"></div></div><div style="flex:1;display:flex;flex-direction:column;gap:3px"><div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:2px;height:20px"><div style="background:rgba(255,255,255,.02);border-radius:3px"></div><div style="background:rgba(255,255,255,.02);border-radius:3px"></div><div style="background:rgba(255,255,255,.02);border-radius:3px"></div><div style="background:rgba(255,255,255,.02);border-radius:3px"></div></div><div style="flex:1;background:rgba(255,255,255,.02);border-radius:4px"></div></div></div></div></div></div>
+<div class="proj-info"><div class="proj-type">Full-Stack App · 2026</div><h3 class="proj-title">Pulse — Analytics Dashboard</h3><p class="proj-desc">3-view analytics dashboard. Animated counters, SVG revenue chart that draws on load, donut chart, heatmap, live activity feed, and transaction tables with progress bars.</p><div class="proj-tech"><span class="tag-n tag">SVG Charts</span><span class="tag-n tag">Data Viz</span><span class="tag-n tag">SPA</span></div><div class="proj-results"><div><div class="pr-v">3 Views</div><div class="pr-l">Dash/Analytics/CRM</div></div><div><div class="pr-v">Animated</div><div class="pr-l">Charts</div></div><div><div class="pr-v">Live Feed</div><div class="pr-l">Real-time</div></div></div></div>
+</div>
+
+<!-- 5. DATA PULSE -->
+<div class="proj" data-cat="widget">
+<div class="proj-vis"><div class="proj-vis-bg" style="background:linear-gradient(135deg,#0d100e,#14201a)"></div><div class="proj-badge tag" style="background:var(--mint-dim);color:var(--mint);border-color:rgba(46,125,50,.15)">iOS Widget</div><div class="pw"><div class="pw-c"><div class="pw-top"><span class="pw-tl">Data Pulse</span><span class="pw-bd" style="background:rgba(46,125,50,.1);color:#4caf50">LIVE</span></div><div class="pw-v">4.82 <span style="font-size:12px;color:rgba(255,255,255,.4)">GB</span></div><div class="pw-sm">of 7.28 GB · 11 days left</div><div class="pw-br"><div class="pw-bf" style="width:62%;background:linear-gradient(90deg,#6366f1,#34d399)"></div></div><div class="pw-sts"><div class="pw-st"><div class="pw-stv">0.41 GB</div><div class="pw-stl" style="color:#4caf50">Daily avg</div></div><div class="pw-st"><div class="pw-stv">Smart</div><div class="pw-stl" style="color:#6366f1">Detection</div></div></div></div></div></div>
+<div class="proj-info"><div class="proj-type" style="color:var(--mint)">iOS Widget · 2025</div><h3 class="proj-title">Data Pulse — Cellular Usage Tracker</h3><p class="proj-desc">Custom iOS widget monitoring MTN cellular data in real-time. SMS parsing for balance updates, gradient progress bars, daily pattern tracking, and estimated days remaining. 3 sizes.</p><div class="proj-tech"><span class="tag-n tag">Scriptable</span><span class="tag-n tag">JavaScript</span><span class="tag-n tag">SMS Parsing</span></div><div class="proj-results"><div><div class="pr-v">3 Sizes</div><div class="pr-l">S/M/L</div></div><div><div class="pr-v">Live Data</div><div class="pr-l">Auto-Updated</div></div><div><div class="pr-v">Smart</div><div class="pr-l">SMS Parsing</div></div></div></div>
+</div>
+
+<!-- 6. NETWORK MONITOR -->
+<div class="proj" data-cat="widget">
+<div class="proj-vis"><div class="proj-vis-bg" style="background:linear-gradient(135deg,#100d10,#201820)"></div><div class="proj-badge tag" style="background:var(--pink-dim);color:var(--pink);border-color:rgba(173,20,87,.15)">iOS Widget</div><div class="pw"><div class="pw-c"><div class="pw-top"><span class="pw-tl">Net Monitor</span><span class="pw-bd" style="background:rgba(244,114,182,.1);color:#f472b6">SECURE</span></div><div class="pw-v" style="font-size:18px;color:#34d399">Protected</div><div class="pw-sm">5 sources · VPN on</div><div class="pw-br"><div class="pw-bf" style="width:85%;background:linear-gradient(90deg,#34d399,#38bdf8)"></div></div><div class="pw-sts"><div class="pw-st"><div class="pw-stv">5</div><div class="pw-stl" style="color:#f472b6">Intel feeds</div></div><div class="pw-st"><div class="pw-stv">A+</div><div class="pw-stl" style="color:#38bdf8">IP score</div></div></div></div></div></div>
+<div class="proj-info"><div class="proj-type" style="color:var(--pink)">iOS Widget · 2025</div><h3 class="proj-title">Network Security Monitor</h3><p class="proj-desc">Real-time network security widget with glassmorphism design. Multi-source threat intelligence, IP reputation scoring, VPN-aware caching. Monitors status on your home screen.</p><div class="proj-tech"><span class="tag-n tag">Scriptable</span><span class="tag-n tag">Threat APIs</span><span class="tag-n tag">Glassmorphism</span></div><div class="proj-results"><div><div class="pr-v">5 Sources</div><div class="pr-l">Threat Intel</div></div><div><div class="pr-v">Real-time</div><div class="pr-l">Monitoring</div></div><div><div class="pr-v">VPN-Aware</div><div class="pr-l">Cache</div></div></div></div>
+</div>
+
+</div>
+</div></section>
+
+<section style="padding:120px 0;text-align:center;position:relative;overflow:hidden"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:500px;background:radial-gradient(ellipse,var(--accent-dim),transparent 60%);pointer-events:none"></div><div class="container" style="position:relative">
+<h2 style="font-family:var(--fd);font-size:clamp(38px,5vw,56px);font-weight:300;margin-bottom:22px;letter-spacing:-.03em">Like what you <em style="font-style:italic;color:var(--accent)">see?</em></h2>
+<p style="font-size:17px;color:var(--text2);max-width:460px;margin:0 auto 44px;line-height:1.85;font-weight:300">I'd love to build something like this for your business. Let's talk about your project.</p>
+<a href="contact.html" class="btn-p"><span>Start a Project</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+</div></section>
+
+<footer class="footer"><div class="container">
+<div class="footer-grid">
+<div><div class="footer-brand"><div class="footer-brand-icon">G</div><span class="footer-brand-text">GEE.DEV</span></div><p class="footer-desc">Full-stack web developer building modern websites, apps, and iOS widgets that look premium and work flawlessly.</p><div class="footer-social"><a href="https://wa.me/2348125211436" target="_blank">💬</a><a href="#" class="off">𝕏</a><a href="#" class="off">📷</a></div></div>
+<div><div class="footer-title">Navigate</div><a href="index.html" class="footer-link">Home</a><a href="services.html" class="footer-link">Services</a><a href="work.html" class="footer-link">Work</a><a href="about.html" class="footer-link">About</a><a href="contact.html" class="footer-link">Contact</a></div>
+<div><div class="footer-title">Services</div><a href="services.html" class="footer-link">Website Design</a><a href="services.html" class="footer-link">Web Applications</a><a href="services.html" class="footer-link">E-Commerce</a><a href="services.html" class="footer-link">Website Fixes</a><a href="services.html" class="footer-link">iOS Widgets</a></div>
+<div><div class="footer-title">Contact</div><a href="mailto:studio.geedev@gmail.com" class="footer-link">studio.geedev@gmail.com</a><a href="https://wa.me/2348125211436" target="_blank" class="footer-link">WhatsApp Me</a><a href="contact.html" class="footer-link">Send a Message</a></div>
+</div>
+<div class="footer-bottom"><div class="footer-copy">© 2026 GEE.DEV. All rights reserved.</div></div>
+</div></footer>
+
+<script>
+(function(){'use strict';
+var n=document.getElementById('nav');
+window.addEventListener('scroll',function(){n.classList.toggle('scrolled',window.scrollY>50)});
+function getTheme(){return localStorage.getItem('geedev-theme')||'light'}
+function applyTheme(t){
+document.documentElement.setAttribute('data-theme',t);
+localStorage.setItem('geedev-theme',t);
+document.querySelectorAll('.theme-icon').forEach(function(el){el.textContent=t==='dark'?'☀️':'🌙'});
+}
+applyTheme(getTheme());
+document.getElementById('themeBtn').addEventListener('click',function(){applyTheme(getTheme()==='dark'?'light':'dark')});
+
+/* FILTER */
+window.filt=function(cat,btn){
+document.querySelectorAll('.fbtn').forEach(function(b){b.classList.remove('active')});
+btn.classList.add('active');
+document.querySelectorAll('.proj').forEach(function(p){
+if(cat==='all'||p.getAttribute('data-cat')===cat){p.style.display='grid';setTimeout(function(){p.style.opacity='1';p.style.transform='translateY(0)'},50)}
+else{p.style.opacity='0';p.style.transform='translateY(16px)';setTimeout(function(){p.style.display='none'},400)}
+});
+};
+})();
+</script>
+</body>
+</html>

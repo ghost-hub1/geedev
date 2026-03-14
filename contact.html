@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — GEE.DEV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=Outfit:wght@200;300;400;500;600;700;800;900&family=Fragment+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+/* ═══ FULL DESIGN SYSTEM (same as index) ═══ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#faf8f5;--bg2:#f2eeea;--bg3:#e8e4de;
+  --surface:#ffffff;--surface2:#f7f5f2;--surface3:#ede9e4;
+  --dark:#1a1714;--dark2:#2c2824;--dark3:#3d3832;
+  --accent:#c62828;--accent2:#b71c1c;--accent-b:#e53935;--accent-light:#ef5350;
+  --accent-dim:rgba(198,40,40,.04);--accent-mid:rgba(198,40,40,.1);--accent-glow:rgba(198,40,40,.08);--accent-strong:rgba(198,40,40,.18);
+  --warm:#c4956a;--warm2:#d4a574;--warm-dim:rgba(196,149,106,.06);--warm-mid:rgba(196,149,106,.12);
+  --mint:#2e7d32;--mint-dim:rgba(46,125,50,.05);
+  --blue:#1565c0;--blue-dim:rgba(21,101,192,.05);
+  --amber:#ef6c00;--amber-dim:rgba(239,108,0,.05);
+  --pink:#ad1457;--pink-dim:rgba(173,20,87,.05);
+  --sky:#0277bd;--sky-dim:rgba(2,119,189,.05);
+  --gold:#f9a825;--gold-dim:rgba(249,168,37,.05);
+  --text:#1a1714;--text2:#6b6560;--text3:#9e9890;--text4:#c4beb6;
+  --border:rgba(0,0,0,.06);--border2:rgba(0,0,0,.1);--border3:rgba(0,0,0,.15);--border-h:rgba(198,40,40,.18);
+  --shadow-sm:0 2px 8px rgba(0,0,0,.04);--shadow-md:0 8px 24px rgba(0,0,0,.06);--shadow-lg:0 20px 48px rgba(0,0,0,.08);--shadow-xl:0 32px 72px rgba(0,0,0,.1);
+  --glass:rgba(255,255,255,.8);--nav-bg:rgba(250,248,245,.88);
+  --fd:'Fraunces',serif;--fb:'Outfit',sans-serif;--fm:'Fragment Mono',monospace;
+  --r:16px;--rs:10px;--rx:24px;--ease:cubic-bezier(.23,1,.32,1);--ease2:cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"]{
+  --bg:#0e0d10;--bg2:#141318;--bg3:#1a1920;
+  --surface:#18171e;--surface2:#1e1d26;--surface3:#26252e;
+  --dark:#f0ece8;--dark2:#d8d4ce;--dark3:#b8b4ae;
+  --accent:#ef5350;--accent2:#e53935;--accent-b:#ff6b6b;--accent-light:#ff8a80;
+  --accent-dim:rgba(239,83,80,.05);--accent-mid:rgba(239,83,80,.12);--accent-glow:rgba(239,83,80,.1);--accent-strong:rgba(239,83,80,.2);
+  --text:#e8e4e0;--text2:#8a8680;--text3:#5a5650;--text4:#3a3630;
+  --border:rgba(255,255,255,.05);--border2:rgba(255,255,255,.08);--border3:rgba(255,255,255,.12);--border-h:rgba(239,83,80,.2);
+  --shadow-sm:0 2px 8px rgba(0,0,0,.15);--shadow-md:0 8px 24px rgba(0,0,0,.2);--shadow-lg:0 20px 48px rgba(0,0,0,.25);--shadow-xl:0 32px 72px rgba(0,0,0,.3);
+  --glass:rgba(14,13,16,.85);--nav-bg:rgba(14,13,16,.88);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:16px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background .5s var(--ease2),color .4s}
+::selection{background:var(--accent);color:#fff}a{color:inherit;text-decoration:none}
+body::after{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:.018;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+[data-theme="dark"] body::after{opacity:.03}
+
+/* AMBIENT */
+.ambient{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.4}
+.orb-1{width:500px;height:500px;top:-150px;right:-80px;background:var(--accent-dim);animation:of1 22s ease-in-out infinite}
+.orb-2{width:350px;height:350px;bottom:-80px;left:-60px;background:var(--warm-dim);animation:of2 28s ease-in-out infinite}
+@keyframes of1{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,20px)}}
+@keyframes of2{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,-15px)}}
+
+.wrap{position:relative;z-index:1}.container{max-width:1280px;margin:0 auto;padding:0 52px}
+.page-enter{animation:pageIn .6s var(--ease) both}@keyframes pageIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* NAV (same as index) */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:22px 0;transition:all .5s var(--ease);background:var(--nav-bg);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.nav.scrolled{padding:12px 0;box-shadow:var(--shadow-sm)}
+.nav-inner{max-width:1280px;margin:0 auto;padding:0 52px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:12px;z-index:1001}
+.nav-logo-icon{width:40px;height:40px;border-radius:10px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px;color:#fff;box-shadow:0 4px 16px var(--accent-glow);transition:all .4s var(--ease);position:relative;overflow:hidden}
+.nav-logo-icon::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.15),transparent)}
+.nav-logo:hover .nav-logo-icon{transform:rotate(-6deg) scale(1.08)}
+.nav-logo-text{font-weight:800;font-size:18px}
+.nav-links{display:flex;gap:4px;list-style:none;align-items:center}
+.nav-links a{font-size:14px;font-weight:600;color:var(--text2);padding:9px 18px;border-radius:10px;transition:all .3s var(--ease);position:relative}
+.nav-links a:hover{color:var(--text);background:var(--accent-dim)}
+.nav-links a.active{color:var(--accent);background:var(--accent-dim)}
+.nav-links a.active::after{content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:16px;height:2px;background:var(--accent);border-radius:2px}
+.nav-right{display:flex;align-items:center;gap:10px;z-index:1001}
+.nav-hire{padding:11px 26px;background:var(--accent);color:#fff;border-radius:100px;font-weight:700;font-size:13px;transition:all .4s var(--ease);box-shadow:0 3px 12px var(--accent-glow);position:relative;overflow:hidden}
+.nav-hire::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.1),transparent)}
+.nav-hire:hover{background:var(--accent2);transform:translateY(-1px);box-shadow:0 6px 24px var(--accent-glow)}
+.theme-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--border2);background:var(--surface);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s var(--ease);font-size:18px;position:relative;overflow:hidden}
+.theme-btn::after{content:'';position:absolute;inset:0;background:var(--accent-dim);opacity:0;transition:opacity .3s;border-radius:50%}
+.theme-btn:hover{border-color:var(--accent-mid);transform:scale(1.08)}.theme-btn:hover::after{opacity:1}
+.hamburger{display:none;width:42px;height:42px;border-radius:10px;border:1px solid var(--border2);background:var(--surface);align-items:center;justify-content:center;cursor:pointer;z-index:1001;transition:all .3s;flex-direction:column;gap:5px;padding:12px}
+.hamburger span{display:block;width:100%;height:2px;background:var(--text);border-radius:2px;transition:all .4s var(--ease);transform-origin:center}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.active span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mobile-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:#faf8f5;background:var(--bg);z-index:998;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px}
+.mobile-overlay.open{display:flex}
+[data-theme="dark"] .mobile-overlay{background:#0e0d10;background:var(--bg)}
+.mobile-overlay a{display:block;font-size:22px;font-weight:800;padding:18px 40px;color:#1a1714;color:var(--text);border-radius:16px;width:280px;text-align:center;background:#ffffff;background:var(--surface);border:2px solid rgba(0,0,0,.08);border-color:var(--border2);text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+[data-theme="dark"] .mobile-overlay a{color:#e8e4e0;background:#18171e;border-color:rgba(255,255,255,.08)}
+.mobile-overlay a.active{color:#c62828;color:var(--accent);border-color:rgba(198,40,40,.2);background:rgba(198,40,40,.04)}
+[data-theme="dark"] .mobile-overlay a.active{color:#ef5350;border-color:rgba(239,83,80,.2);background:rgba(239,83,80,.05)}
+.mobile-overlay .mobile-cta{display:block;margin-top:12px;padding:18px 40px;background:#c62828;background:var(--accent);color:#ffffff!important;border-radius:100px;font-weight:800;font-size:18px;width:280px;text-align:center;border:none;box-shadow:0 6px 24px rgba(198,40,40,.15)}
+[data-theme="dark"] .mobile-overlay .mobile-cta{background:#ef5350}
+.mobile-theme{display:flex;margin-top:20px;width:52px;height:52px;border-radius:50%;border:2px solid rgba(0,0,0,.08);border-color:var(--border2);background:#ffffff;background:var(--surface);align-items:center;justify-content:center;cursor:pointer;font-size:22px}
+[data-theme="dark"] .mobile-theme{background:#18171e;border-color:rgba(255,255,255,.08)}
+
+/* BUTTONS */
+.btn-p{display:inline-flex;align-items:center;gap:10px;padding:17px 38px;background:var(--accent);color:#fff;border-radius:100px;font-weight:700;font-size:15px;transition:all .4s var(--ease);box-shadow:0 4px 20px var(--accent-glow);border:none;cursor:pointer;font-family:var(--fb);position:relative;overflow:hidden}
+.btn-p::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.12),transparent)}
+.btn-p:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 10px 32px var(--accent-glow)}
+.btn-p svg{width:17px;height:17px;transition:transform .3s}.btn-p:hover svg{transform:translateX(3px)}
+.btn-g{display:inline-flex;align-items:center;gap:10px;padding:17px 34px;border:2px solid var(--border3);border-radius:100px;font-weight:700;font-size:15px;color:var(--text2);transition:all .4s var(--ease);cursor:pointer;font-family:var(--fb);background:none}
+.btn-g:hover{border-color:var(--accent);color:var(--accent)}
+
+/* SECTION HEADERS */
+.sh{margin-bottom:60px}
+.sh-tag{display:inline-flex;align-items:center;gap:10px;font-family:var(--fm);font-size:11px;color:var(--accent);letter-spacing:.14em;text-transform:uppercase;margin-bottom:20px}
+.sh-tag::before{content:'';width:32px;height:2px;background:var(--accent);border-radius:2px}
+.sh-title{font-family:var(--fd);font-size:clamp(34px,4.5vw,54px);font-weight:400;line-height:1.08;letter-spacing:-.02em}
+.sh-title em{font-style:italic;color:var(--accent)}
+
+/* REVEALS */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .8s var(--ease),transform .8s var(--ease)}.reveal.visible{opacity:1;transform:translateY(0)}
+.stagger-1{transition-delay:.08s}.stagger-2{transition-delay:.16s}.stagger-3{transition-delay:.24s}.stagger-4{transition-delay:.32s}
+
+/* ═══════════════════════════════════════════════════════════
+   CONTACT-SPECIFIC STYLES
+   ═══════════════════════════════════════════════════════════ */
+.page-hero{padding:160px 0 80px;text-align:center;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:800px;height:500px;background:radial-gradient(ellipse,var(--accent-dim),transparent 60%);pointer-events:none;opacity:.5}
+.ph-title{font-family:var(--fd);font-size:clamp(40px,5.5vw,64px);font-weight:300;line-height:1.05;letter-spacing:-.03em;margin-bottom:16px;position:relative}
+.ph-title em{font-style:italic;color:var(--accent)}
+.ph-sub{font-size:18px;color:var(--text2);max-width:520px;margin:0 auto;line-height:1.85;font-weight:300;position:relative}
+
+/* CONTACT GRID */
+.contact-section{padding-bottom:120px}
+.contact-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:60px}
+
+/* FORM */
+.contact-form{display:flex;flex-direction:column;gap:22px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-group{display:flex;flex-direction:column;gap:8px}
+.form-label{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text2)}
+.form-input{width:100%;padding:16px 20px;background:var(--surface);border:2px solid var(--border);border-radius:14px;color:var(--text);font-family:var(--fb);font-size:14px;transition:all .3s var(--ease);outline:none}
+.form-input:focus{border-color:var(--accent-mid);background:var(--surface2);box-shadow:0 0 0 4px var(--accent-dim)}
+.form-input::placeholder{color:var(--text4)}
+.form-input:hover{border-color:var(--border2)}
+textarea.form-input{resize:vertical;min-height:150px}
+select.form-input{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%239e9890' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:42px}
+.form-submit{padding:18px 42px;background:var(--accent);color:#fff;border:none;border-radius:100px;font-size:16px;font-weight:700;cursor:pointer;transition:all .4s var(--ease);font-family:var(--fb);display:inline-flex;align-items:center;gap:12px;box-shadow:0 4px 20px var(--accent-glow);align-self:flex-start;position:relative;overflow:hidden}
+.form-submit::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.12),transparent)}
+.form-submit:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 10px 32px var(--accent-glow)}
+.form-submit:active{transform:translateY(0)}
+.form-submit svg{width:18px;height:18px;transition:transform .3s}.form-submit:hover svg{transform:translateX(3px)}
+.form-note{font-size:13px;color:var(--text4);margin-top:6px;display:flex;align-items:center;gap:8px}
+.form-note::before{content:'';width:16px;height:2px;background:var(--accent);border-radius:2px;opacity:.4}
+
+/* SUCCESS */
+.form-success{display:none;text-align:center;padding:72px 40px;background:var(--surface);border:2px solid var(--accent-mid);border-radius:var(--rx);box-shadow:var(--shadow-lg)}
+.form-success.show{display:block;animation:successPop .6s var(--ease)}
+@keyframes successPop{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+.fs-icon{font-size:56px;margin-bottom:20px;display:block}
+.fs-title{font-family:var(--fd);font-size:32px;font-weight:500;margin-bottom:10px}
+.fs-text{font-size:16px;color:var(--text2);line-height:1.7}
+.fs-text a{color:var(--accent);border-bottom:1px dashed var(--accent-mid)}
+
+/* INFO SIDEBAR */
+.contact-info{display:flex;flex-direction:column;gap:18px}
+
+/* Contact cards */
+.ci-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:30px;transition:all .5s var(--ease);position:relative;overflow:hidden}
+.ci-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .4s}
+.ci-card:hover{border-color:var(--border-h);transform:translateY(-3px);box-shadow:var(--shadow-md)}.ci-card:hover::before{opacity:1}
+.ci-card:nth-child(1)::before{background:linear-gradient(90deg,var(--accent),var(--accent-b))}
+.ci-card:nth-child(2)::before{background:linear-gradient(90deg,var(--mint),#43a047)}
+.ci-icon{width:48px;height:48px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:18px;transition:transform .4s var(--ease)}
+.ci-card:hover .ci-icon{transform:scale(1.1) rotate(-3deg)}
+.ci-icon-red{background:var(--accent-dim);border:1px solid var(--accent-mid)}
+.ci-icon-green{background:var(--mint-dim);border:1px solid rgba(46,125,50,.1)}
+.ci-icon-amber{background:var(--amber-dim);border:1px solid rgba(239,108,0,.1)}
+.ci-title{font-weight:800;font-size:18px;margin-bottom:6px;letter-spacing:-.01em}
+.ci-text{font-size:14px;color:var(--text2);line-height:1.75;margin-bottom:12px}
+.ci-link{display:inline-flex;align-items:center;gap:8px;font-family:var(--fm);font-size:13px;color:var(--accent);transition:gap .3s;border-bottom:1px dashed var(--accent-mid);padding-bottom:2px}
+.ci-link:hover{gap:12px;border-color:var(--accent)}
+
+/* Response time card */
+.rt-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:32px;text-align:center;transition:all .5s var(--ease);position:relative;overflow:hidden}
+.rt-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,var(--mint-dim),transparent 60%);pointer-events:none}
+.rt-card:hover{border-color:rgba(46,125,50,.15);box-shadow:var(--shadow-md)}
+.rt-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border-radius:100px;background:var(--mint-dim);border:1px solid rgba(46,125,50,.12);margin-bottom:16px;position:relative}
+.rt-dot{width:9px;height:9px;border-radius:50%;background:var(--mint);position:relative}
+.rt-dot::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--mint);opacity:0;animation:rtPing 2.5s ease-in-out infinite}
+@keyframes rtPing{0%,100%{opacity:0;transform:scale(.7)}50%{opacity:.4;transform:scale(1.5)}}
+.rt-label{font-family:var(--fm);font-size:10px;color:var(--mint);letter-spacing:.1em;text-transform:uppercase}
+.rt-title{font-family:var(--fd);font-size:24px;margin-bottom:8px;position:relative}
+.rt-text{font-size:14px;color:var(--text2);line-height:1.75;position:relative}
+.rt-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;position:relative}
+.rt-stat{background:var(--surface2);border-radius:12px;padding:14px;transition:background .3s}
+.rt-stat:hover{background:var(--surface3)}
+.rt-stat-val{font-size:20px;font-weight:900;color:var(--accent);margin-bottom:2px}
+.rt-stat-lbl{font-family:var(--fm);font-size:9px;color:var(--text3);letter-spacing:.08em;text-transform:uppercase}
+
+/* Social cards */
+.social-section{margin-top:8px}
+.social-label{font-size:13px;font-weight:800;margin-bottom:14px;letter-spacing:-.01em}
+.social-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.social-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:18px 16px;display:flex;align-items:center;gap:14px;transition:all .4s var(--ease);cursor:pointer}
+.social-card:hover{border-color:var(--border-h);transform:translateY(-2px);background:var(--surface2);box-shadow:var(--shadow-sm)}
+.social-card.off{pointer-events:none;opacity:.35}
+.sc-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.sc-name{font-weight:700;font-size:14px}
+.sc-handle{font-size:11px;color:var(--text3);margin-top:1px}
+
+/* FAQ */
+.faq-section{padding:80px 0 120px}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:48px}
+.faq-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:all .4s var(--ease)}
+.faq-item:hover{border-color:var(--border2)}
+.faq-item.open{border-color:var(--accent-mid);box-shadow:var(--shadow-sm)}
+.faq-q{padding:24px 28px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:15px;transition:background .3s;gap:16px}
+.faq-q:hover{background:var(--surface2)}
+.faq-arrow{width:28px;height:28px;border-radius:50%;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--text3);transition:all .4s var(--ease);flex-shrink:0}
+.faq-item.open .faq-arrow{background:var(--accent-dim);color:var(--accent);transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .5s var(--ease)}
+.faq-item.open .faq-a{max-height:300px}
+.faq-a-inner{padding:0 28px 24px;font-size:14px;color:var(--text2);line-height:1.85}
+
+/* CTA */
+.cta{padding:140px 0;text-align:center;position:relative;overflow:hidden}
+.cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:500px;background:radial-gradient(ellipse,var(--accent-dim),transparent 60%);pointer-events:none;opacity:.5}
+
+/* FOOTER (same as index) */
+.footer{padding:80px 0 40px;border-top:1px solid var(--border);background:var(--surface);transition:all .4s}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:44px;margin-bottom:52px}
+.footer-brand{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.footer-brand-icon{width:32px;height:32px;border-radius:8px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;color:#fff}
+.footer-brand-text{font-weight:800;font-size:17px}
+.footer-desc{font-size:14px;color:var(--text3);line-height:1.7;max-width:280px;margin-bottom:16px}
+.footer-social{display:flex;gap:10px}
+.footer-social a{width:38px;height:38px;border-radius:10px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:15px;transition:all .3s;color:var(--text3)}
+.footer-social a:hover{background:var(--accent-dim);border-color:var(--accent-mid);color:var(--accent)}
+.footer-social a.off{pointer-events:none;opacity:.3}
+.footer-title{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text2);margin-bottom:18px}
+.footer-link{display:block;font-size:14px;color:var(--text3);padding:5px 0;transition:color .3s}.footer-link:hover{color:var(--accent)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;border-top:1px solid var(--border)}
+.footer-copy{font-family:var(--fm);font-size:11px;color:var(--text4)}
+.footer-bottom-links{display:flex;gap:20px}
+.footer-bottom-links a{font-size:12px;color:var(--text4);transition:color .3s}.footer-bottom-links a:hover{color:var(--accent)}
+
+/* RESPONSIVE */
+@media(max-width:1100px){.container{padding:0 36px}.nav-inner{padding:0 36px}.contact-grid{grid-template-columns:1fr;gap:48px}.faq-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr;gap:28px}}
+@media(max-width:768px){.container{padding:0 20px}.nav-inner{padding:0 20px}.nav-links{display:none}.nav-hire{display:none}.hamburger{display:flex}.page-hero{padding:140px 0 60px}.form-row{grid-template-columns:1fr}.social-grid{grid-template-columns:1fr}.rt-stats{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}.footer-bottom{flex-direction:column;gap:14px;text-align:center}}
+</style>
+</head>
+<body>
+<div class="ambient"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
+<div class="wrap page-enter">
+
+<!-- NAV -->
+<nav class="nav" id="nav"><div class="nav-inner">
+<a href="index.html" class="nav-logo"><div class="nav-logo-icon">G</div><span class="nav-logo-text">GEE.DEV</span></a>
+<ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="services.html">Services</a></li><li><a href="work.html">Work</a></li><li><a href="about.html">About</a></li></ul>
+<div class="nav-right"><button class="theme-btn" id="themeBtn" title="Toggle theme"><span class="theme-icon">🌙</span></button><a href="contact.html" class="nav-hire active" style="background:var(--accent2)">Hire Me</a><button class="hamburger" id="burger"><span></span><span></span><span></span></button></div>
+</div></nav>
+<div class="mobile-overlay" id="mobileOverlay"><a href="index.html">Home</a><a href="services.html">Services</a><a href="work.html">Work</a><a href="about.html">About</a><a href="contact.html" class="mobile-cta active">Hire Me</a><button class="mobile-theme" id="mobileTheme"><span class="theme-icon">🌙</span></button></div>
+
+<!-- HERO -->
+<section class="page-hero">
+<div class="container">
+<div class="sh-tag reveal" style="justify-content:center">Get In Touch</div>
+<h1 class="ph-title reveal stagger-1">Let's build something<br><em>great together.</em></h1>
+<p class="ph-sub reveal stagger-2">Have a project in mind? Need a website, an app, or a quick fix? Drop me a message and I'll get back to you within 24 hours.</p>
+</div>
+</section>
+
+<!-- CONTACT CONTENT -->
+<section class="contact-section"><div class="container"><div class="contact-grid">
+
+<!-- LEFT: FORM -->
+<div>
+<form class="contact-form reveal" id="contactForm">
+<div class="form-row">
+<div class="form-group"><label class="form-label">Your Name *</label><input type="text" class="form-input" placeholder="What should I call you?" required id="fn"></div>
+<div class="form-group"><label class="form-label">Email Address *</label><input type="email" class="form-input" placeholder="your@email.com" required id="fe"></div>
+</div>
+<div class="form-row">
+<div class="form-group"><label class="form-label">Phone (Optional)</label><input type="tel" class="form-input" placeholder="+1 (555) 000-0000" id="fp"></div>
+<div class="form-group"><label class="form-label">Budget Range</label><select class="form-input" id="fb"><option value="">Select your budget</option><option>Under $200</option><option>$200 – $500</option><option>$500 – $1,000</option><option>$1,000 – $2,500</option><option>$2,500+</option><option>Not sure yet</option></select></div>
+</div>
+<div class="form-group"><label class="form-label">Project Type</label><select class="form-input" id="ft"><option value="">What do you need?</option><option>New Website / Landing Page</option><option>Website Redesign</option><option>E-Commerce / Online Store</option><option>Web Application / Dashboard</option><option>Website Fix / Bug Repair</option><option>iOS Widget / Automation</option><option>Something Else</option></select></div>
+<div class="form-group"><label class="form-label">Tell Me About Your Project *</label><textarea class="form-input" placeholder="What does your business do? What are you looking for? Any websites you like the look of? The more detail you share, the better I can help." required id="fm"></textarea></div>
+<button type="submit" class="form-submit">Send Message <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+<p class="form-note">I respond to every message within 24 hours. Usually much faster.</p>
+</form>
+<div class="form-success" id="formOk"><span class="fs-icon">✅</span><h3 class="fs-title">Message sent!</h3><p class="fs-text">Thanks for reaching out. I'll get back to you within 24 hours. In the meantime, check out my <a href="work.html">recent work</a>.</p></div>
+</div>
+
+<!-- RIGHT: INFO -->
+<div class="contact-info">
+
+<div class="ci-card reveal">
+<div class="ci-icon ci-icon-red">✉️</div>
+<h3 class="ci-title">Email Me</h3>
+<p class="ci-text">Best way to reach me for project inquiries. I check email throughout the day and aim to respond within a few hours.</p>
+<a href="mailto:studio.geedev@gmail.com" class="ci-link">studio.geedev@gmail.com →</a>
+</div>
+
+<div class="ci-card reveal stagger-1">
+<div class="ci-icon ci-icon-green">💬</div>
+<h3 class="ci-title">WhatsApp</h3>
+<p class="ci-text">Prefer chatting? Tap below to open a WhatsApp conversation with me directly. Quick and easy.</p>
+<a href="https://wa.me/2348125211436" target="_blank" rel="noopener" class="ci-link">Chat on WhatsApp →</a>
+</div>
+
+<div class="rt-card reveal stagger-2">
+<div class="rt-badge"><span class="rt-dot"></span><span class="rt-label">Typically Online</span></div>
+<h3 class="rt-title">Fast Response Time</h3>
+<p class="rt-text">I take response time seriously. Most inquiries get a reply within a couple of hours during business hours.</p>
+<div class="rt-stats">
+<div class="rt-stat"><div class="rt-stat-val">&lt;4hr</div><div class="rt-stat-lbl">Avg Response</div></div>
+<div class="rt-stat"><div class="rt-stat-val">24hr</div><div class="rt-stat-lbl">Max Wait</div></div>
+</div>
+</div>
+
+<div class="ci-card reveal stagger-3">
+<div class="ci-icon ci-icon-amber">🔗</div>
+<h3 class="ci-title">Fiverr</h3>
+<p class="ci-text">For quick projects with secure payment through the platform. Browse my gigs and order directly.</p>
+<a href="#" class="ci-link">View Fiverr Profile →</a>
+</div>
+
+<div class="social-section reveal stagger-4">
+<div class="social-label">Find Me Online</div>
+<div class="social-grid">
+<a href="https://wa.me/2348125211436" target="_blank" class="social-card"><div class="sc-icon" style="background:var(--mint-dim)">💬</div><div><div class="sc-name">WhatsApp</div><div class="sc-handle">Chat directly</div></div></a>
+<a href="#" class="social-card"><div class="sc-icon" style="background:var(--accent-dim)">🔗</div><div><div class="sc-name">Fiverr</div><div class="sc-handle">@geedev</div></div></a>
+<a href="#" class="social-card off"><div class="sc-icon" style="background:var(--sky-dim)">𝕏</div><div><div class="sc-name">Twitter / X</div><div class="sc-handle">Coming soon</div></div></a>
+<a href="#" class="social-card off"><div class="sc-icon" style="background:var(--pink-dim)">📷</div><div><div class="sc-name">Instagram</div><div class="sc-handle">Coming soon</div></div></a>
+</div>
+</div>
+
+</div>
+</div></div></section>
+
+<!-- FAQ -->
+<section class="faq-section"><div class="container">
+<div class="sh reveal" style="text-align:center"><div class="sh-tag" style="justify-content:center">Common Questions</div><h2 class="sh-title" style="margin:0 auto">Frequently <em>asked.</em></h2></div>
+<div class="faq-grid">
+<div class="faq-item reveal"><div class="faq-q"><span>How much does a website cost?</span><span class="faq-arrow">+</span></div><div class="faq-a"><div class="faq-a-inner">A landing page starts around $200–$300. A full multi-page business website runs $400–$600. More complex projects like e-commerce stores or dashboards are quoted individually. I always give you a clear price before any work begins — no surprises.</div></div></div>
+<div class="faq-item reveal stagger-1"><div class="faq-q"><span>How long does it take?</span><span class="faq-arrow">+</span></div><div class="faq-a"><div class="faq-a-inner">Most websites take 5–10 days depending on complexity. Landing pages can be done in 3 days. I show you a draft halfway through so you can give feedback before the final version. Rush delivery is available for an extra fee.</div></div></div>
+<div class="faq-item reveal"><div class="faq-q"><span>Will my website work on mobile?</span><span class="faq-arrow">+</span></div><div class="faq-a"><div class="faq-a-inner">Every single site I build is mobile responsive from day one. It will look and work perfectly on phones, tablets, laptops, and desktops. I test across multiple screen sizes and browsers before delivering.</div></div></div>
+<div class="faq-item reveal stagger-1"><div class="faq-q"><span>How does payment work?</span><span class="faq-arrow">+</span></div><div class="faq-a"><div class="faq-a-inner">Simple and safe — 50% upfront to start, 50% when you're happy with the final result. I accept PayPal, Wise, and Payoneer. On Fiverr, payment is handled securely through the platform.</div></div></div>
+<div class="faq-item reveal"><div class="faq-q"><span>Do you do website redesigns?</span><span class="faq-arrow">+</span></div><div class="faq-a"><div class="faq-a-inner">Absolutely. If your current site is outdated, slow, or just doesn't represent your business well anymore — I can modernize it completely. Send me the URL and I'll give you an honest assessment plus a quote.</div></div></div>
+<div class="faq-item reveal stagger-1"><div class="faq-q"><span>What do you need from me to start?</span><span class="faq-arrow">+</span></div><div class="faq-a"><div class="faq-a-inner">Your logo (if you have one), photos you want on the site, the text content for each page, and any websites you like the look of for reference. Don't have everything ready? No problem — I can work with bullet points and help you put the content together.</div></div></div>
+</div>
+</div></section>
+
+<!-- CTA -->
+<section class="cta"><div class="cta-glow"></div><div class="container">
+<h2 style="font-family:var(--fd);font-size:clamp(36px,4.5vw,52px);font-weight:300;margin-bottom:20px;letter-spacing:-.03em;position:relative" class="reveal">Still thinking? <em style="font-style:italic;color:var(--accent)">No pressure.</em></h2>
+<p style="font-size:17px;color:var(--text2);max-width:460px;margin:0 auto 40px;line-height:1.85;font-weight:300;position:relative" class="reveal stagger-1">Even if you're just exploring options, feel free to reach out. I'm happy to chat about your project with zero obligation.</p>
+<div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;position:relative" class="reveal stagger-2">
+<a href="mailto:studio.geedev@gmail.com" class="btn-p"><span>Email Me</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+<a href="https://wa.me/2348125211436" target="_blank" class="btn-g">💬 WhatsApp</a>
+</div>
+</div></section>
+
+<!-- FOOTER -->
+<footer class="footer"><div class="container">
+<div class="footer-grid">
+<div><div class="footer-brand"><div class="footer-brand-icon">G</div><span class="footer-brand-text">GEE.DEV</span></div><p class="footer-desc">Full-stack web developer building modern websites, apps, and iOS widgets that look premium and work flawlessly.</p><div class="footer-social"><a href="https://wa.me/2348125211436" target="_blank">💬</a><a href="#" class="off">𝕏</a><a href="#" class="off">📷</a></div></div>
+<div><div class="footer-title">Navigate</div><a href="index.html" class="footer-link">Home</a><a href="services.html" class="footer-link">Services</a><a href="work.html" class="footer-link">Work</a><a href="about.html" class="footer-link">About</a><a href="contact.html" class="footer-link">Contact</a></div>
+<div><div class="footer-title">Services</div><a href="services.html" class="footer-link">Website Design</a><a href="services.html" class="footer-link">Web Applications</a><a href="services.html" class="footer-link">E-Commerce</a><a href="services.html" class="footer-link">Website Fixes</a><a href="services.html" class="footer-link">iOS Widgets</a></div>
+<div><div class="footer-title">Contact</div><a href="mailto:studio.geedev@gmail.com" class="footer-link">studio.geedev@gmail.com</a><a href="https://wa.me/2348125211436" target="_blank" class="footer-link">WhatsApp Me</a><a href="contact.html" class="footer-link">Send a Message</a></div>
+</div>
+<div class="footer-bottom"><div class="footer-copy">&copy; 2026 GEE.DEV. All rights reserved.</div><div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a></div></div>
+</div></footer>
+
+</div>
+
+<script>
+(function(){'use strict';
+/* NAV */
+var nav=document.getElementById('nav');
+window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>50)});
+
+/* HAMBURGER */
+var burger=document.getElementById('burger'),overlay=document.getElementById('mobileOverlay');
+burger.addEventListener('click',function(){burger.classList.toggle('active');overlay.classList.toggle('open');document.body.style.overflow=overlay.classList.contains('open')?'hidden':''});
+overlay.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){burger.classList.remove('active');overlay.classList.remove('open');document.body.style.overflow=''})});
+
+/* THEME */
+function getTheme(){return localStorage.getItem('geedev-theme')||'light'}
+function applyTheme(t){document.documentElement.setAttribute('data-theme',t);localStorage.setItem('geedev-theme',t);document.querySelectorAll('.theme-icon').forEach(function(el){el.textContent=t==='dark'?'☀️':'🌙'})}
+applyTheme(getTheme());
+document.getElementById('themeBtn').addEventListener('click',function(){applyTheme(getTheme()==='dark'?'light':'dark')});
+document.getElementById('mobileTheme').addEventListener('click',function(){applyTheme(getTheme()==='dark'?'light':'dark')});
+
+/* REVEALS */
+var reveals=document.querySelectorAll('.reveal');
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:0.06,rootMargin:'0px 0px -40px 0px'});
+reveals.forEach(function(el){obs.observe(el)});
+
+/* FAQ */
+document.querySelectorAll('.faq-q').forEach(function(q){
+  q.addEventListener('click',function(){
+    var item=q.parentElement;
+    var wasOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(function(f){f.classList.remove('open')});
+    if(!wasOpen)item.classList.add('open');
+  });
+});
+
+/* FORM */
+document.getElementById('contactForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  var n=document.getElementById('fn').value,em=document.getElementById('fe').value,p=document.getElementById('fp').value,b=document.getElementById('fb').value,t=document.getElementById('ft').value,m=document.getElementById('fm').value;
+  var subj='New Project Inquiry from '+n;
+  var body='Name: '+n+'\nEmail: '+em+'\nPhone: '+(p||'Not provided')+'\nBudget: '+(b||'Not specified')+'\nProject Type: '+(t||'Not specified')+'\n\nMessage:\n'+m;
+  window.location.href='mailto:studio.geedev@gmail.com?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body);
+  document.getElementById('contactForm').style.display='none';
+  document.getElementById('formOk').classList.add('show');
+});
+
+})();
+</script>
+</body>
+</html>

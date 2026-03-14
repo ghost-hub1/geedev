@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services - GEE.DEV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=Outfit:wght@200;300;400;500;600;700;800;900&family=Fragment+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#faf8f5;--bg2:#f2eeea;--surface:#fff;--surface2:#f7f5f2;--surface3:#ede9e4;
+--accent:#c62828;--accent2:#b71c1c;--accent-b:#e53935;
+--accent-dim:rgba(198,40,40,.04);--accent-mid:rgba(198,40,40,.1);--accent-glow:rgba(198,40,40,.08);
+--warm:#c4956a;--warm-dim:rgba(196,149,106,.06);--warm-mid:rgba(196,149,106,.12);
+--mint:#2e7d32;--mint-dim:rgba(46,125,50,.05);
+--amber:#ef6c00;--amber-dim:rgba(239,108,0,.05);
+--pink:#ad1457;--pink-dim:rgba(173,20,87,.05);
+--sky:#0277bd;--sky-dim:rgba(2,119,189,.05);
+--text:#1a1714;--text2:#6b6560;--text3:#9e9890;--text4:#c4beb6;
+--border:rgba(0,0,0,.06);--border2:rgba(0,0,0,.1);--border3:rgba(0,0,0,.15);--border-h:rgba(198,40,40,.18);
+--shadow-sm:0 2px 8px rgba(0,0,0,.04);--shadow-md:0 8px 24px rgba(0,0,0,.06);--shadow-lg:0 20px 48px rgba(0,0,0,.08);
+--nav-bg:rgba(250,248,245,.92);
+--fd:'Fraunces',serif;--fb:'Outfit',sans-serif;--fm:'Fragment Mono',monospace;
+--r:16px;--rx:24px;--ease:cubic-bezier(.23,1,.32,1);
+}
+[data-theme="dark"]{
+--bg:#0e0d10;--bg2:#141318;--surface:#18171e;--surface2:#1e1d26;--surface3:#26252e;
+--accent:#ef5350;--accent2:#e53935;--accent-b:#ff6b6b;
+--accent-dim:rgba(239,83,80,.05);--accent-mid:rgba(239,83,80,.12);--accent-glow:rgba(239,83,80,.1);
+--text:#e8e4e0;--text2:#8a8680;--text3:#5a5650;--text4:#3a3630;
+--border:rgba(255,255,255,.05);--border2:rgba(255,255,255,.08);--border3:rgba(255,255,255,.12);--border-h:rgba(239,83,80,.2);
+--shadow-sm:0 2px 8px rgba(0,0,0,.15);--shadow-md:0 8px 24px rgba(0,0,0,.2);--shadow-lg:0 20px 48px rgba(0,0,0,.25);
+--nav-bg:rgba(14,13,16,.92);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:16px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background .5s,color .4s}
+::selection{background:var(--accent);color:#fff}
+a{color:inherit;text-decoration:none}
+.container{max-width:1280px;margin:0 auto;padding:0 52px}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px 0;background:var(--nav-bg);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border);transition:padding .4s,box-shadow .3s}
+.nav.scrolled{padding:12px 0;box-shadow:var(--shadow-sm)}
+.nav-inner{max-width:1280px;margin:0 auto;padding:0 52px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:12px}
+.nav-logo-icon{width:40px;height:40px;border-radius:10px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px;color:#fff;box-shadow:0 4px 16px var(--accent-glow);transition:transform .4s;position:relative;overflow:hidden}
+.nav-logo-icon::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.15),transparent)}
+.nav-logo:hover .nav-logo-icon{transform:rotate(-6deg) scale(1.08)}
+.nav-logo-text{font-weight:800;font-size:18px}
+.nav-links{display:flex;gap:4px;list-style:none}
+.nav-links a{font-size:14px;font-weight:600;color:var(--text2);padding:9px 18px;border-radius:10px;transition:all .3s}
+.nav-links a:hover{color:var(--text);background:var(--accent-dim)}
+.nav-links a.active{color:var(--accent);background:var(--accent-dim)}
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav-hire{padding:11px 26px;background:var(--accent);color:#fff;border-radius:100px;font-weight:700;font-size:13px;transition:all .4s;box-shadow:0 3px 12px var(--accent-glow);position:relative;overflow:hidden}
+.nav-hire::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.1),transparent)}
+.nav-hire:hover{background:var(--accent2);transform:translateY(-1px)}
+.theme-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--border2);background:var(--surface);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;font-size:18px}
+.theme-btn:hover{border-color:var(--accent-mid);transform:scale(1.08)}
+.hamburger{display:none;width:42px;height:42px;border-radius:10px;border:1px solid var(--border2);background:var(--surface);align-items:center;justify-content:center;cursor:pointer;flex-direction:column;gap:5px;padding:12px}
+.hamburger span{display:block;width:100%;height:2px;background:var(--text);border-radius:2px;transition:all .4s}
+
+/* HERO */
+.page-hero{padding:160px 0 80px;text-align:center;position:relative}
+.page-hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:800px;height:500px;background:radial-gradient(ellipse,var(--accent-dim),transparent 60%);pointer-events:none}
+.ph-tag{display:inline-flex;align-items:center;gap:10px;font-family:var(--fm);font-size:11px;color:var(--accent);letter-spacing:.14em;text-transform:uppercase;margin-bottom:20px;position:relative}
+.ph-tag::before{content:'';width:32px;height:2px;background:var(--accent);border-radius:2px}
+.ph-title{font-family:var(--fd);font-size:clamp(40px,5.5vw,64px);font-weight:300;line-height:1.05;letter-spacing:-.03em;margin-bottom:16px;position:relative}
+.ph-title em{font-style:italic;color:var(--accent)}
+.ph-sub{font-size:18px;color:var(--text2);max-width:540px;margin:0 auto;line-height:1.85;font-weight:300;position:relative}
+
+/* SERVICE CARDS */
+.svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.svc-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rx);padding:44px 36px;transition:all .5s var(--ease);position:relative;overflow:hidden}
+.svc-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .4s}
+.svc-card:hover{border-color:var(--border-h);transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.svc-card:hover::after{opacity:1}
+.svc-card:nth-child(1)::after{background:linear-gradient(90deg,#c62828,#e53935)}
+.svc-card:nth-child(2)::after{background:linear-gradient(90deg,#2e7d32,#43a047)}
+.svc-card:nth-child(3)::after{background:linear-gradient(90deg,#ef6c00,#f9a825)}
+.svc-card:nth-child(4)::after{background:linear-gradient(90deg,#c4956a,#d4a574)}
+.svc-card:nth-child(5)::after{background:linear-gradient(90deg,#0277bd,#039be5)}
+.svc-card:nth-child(6)::after{background:linear-gradient(90deg,#ad1457,#e91e63)}
+.svc-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:24px;transition:transform .4s var(--ease)}
+.svc-card:hover .svc-icon{transform:scale(1.1) rotate(-3deg)}
+.si-1{background:var(--accent-dim);border:1px solid var(--accent-mid)}
+.si-2{background:var(--mint-dim);border:1px solid rgba(46,125,50,.1)}
+.si-3{background:var(--amber-dim);border:1px solid rgba(239,108,0,.1)}
+.si-4{background:var(--warm-dim);border:1px solid var(--warm-mid)}
+.si-5{background:var(--sky-dim);border:1px solid rgba(2,119,189,.1)}
+.si-6{background:var(--pink-dim);border:1px solid rgba(173,20,87,.1)}
+.svc-title{font-weight:800;font-size:20px;margin-bottom:12px}
+.svc-desc{font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:20px}
+.svc-feats{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.svc-feat{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--text2)}
+.svc-feat::before{content:'✓';color:var(--accent);font-weight:800;font-size:12px;width:20px;height:20px;display:flex;align-items:center;justify-content:center;background:var(--accent-dim);border-radius:50%;flex-shrink:0}
+.svc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+.tag{padding:5px 14px;border-radius:100px;font-family:var(--fm);font-size:10px;background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent-mid)}
+.svc-price{font-family:var(--fm);font-size:13px;color:var(--text3)}
+.svc-price strong{color:var(--accent);font-size:16px}
+
+/* PROCESS */
+.sh-tag{display:inline-flex;align-items:center;gap:10px;font-family:var(--fm);font-size:11px;color:var(--accent);letter-spacing:.14em;text-transform:uppercase;margin-bottom:20px}
+.sh-tag::before{content:'';width:32px;height:2px;background:var(--accent);border-radius:2px}
+.sh-title{font-family:var(--fd);font-size:clamp(34px,4.5vw,54px);font-weight:400;line-height:1.08;letter-spacing:-.02em;margin-bottom:16px}
+.sh-title em{font-style:italic;color:var(--accent)}
+.sh-desc{font-size:17px;font-weight:300;color:var(--text2);max-width:540px;line-height:1.85}
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.proc-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:40px 28px;transition:all .5s var(--ease);position:relative;overflow:hidden}
+.proc-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);opacity:0;transition:opacity .4s}
+.proc-card:hover{border-color:var(--border-h);transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.proc-card:hover::after{opacity:1}
+.proc-num{font-family:var(--fm);font-size:52px;color:var(--surface3);line-height:1;margin-bottom:22px;transition:color .5s}
+.proc-card:hover .proc-num{color:var(--accent-mid)}
+.proc-title{font-weight:800;font-size:18px;margin-bottom:10px}
+.proc-desc{font-size:14px;color:var(--text2);line-height:1.75}
+.proc-time{font-family:var(--fm);font-size:10px;color:var(--text4);margin-top:14px;display:flex;align-items:center;gap:8px}
+.proc-time::before{content:'';width:16px;height:2px;background:var(--accent);border-radius:2px;opacity:.4}
+
+/* PRICING */
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:48px}
+.price-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rx);padding:40px 32px;text-align:center;transition:all .5s var(--ease)}
+.price-card:hover{border-color:var(--border-h);transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.price-card.pop{border-color:var(--accent-mid);position:relative}
+.price-card.pop::after{content:'Most Popular';position:absolute;top:-13px;left:50%;transform:translateX(-50%);padding:6px 22px;border-radius:100px;background:var(--accent);color:#fff;font-size:11px;font-weight:700}
+.pc-name{font-family:var(--fd);font-size:24px;margin-bottom:8px}
+.pc-price{font-size:42px;font-weight:900;color:var(--accent);margin-bottom:4px}
+.pc-price span{font-size:14px;color:var(--text3);font-weight:400}
+.pc-sub{font-size:12px;color:var(--text4);margin-bottom:28px}
+.pc-feats{text-align:left;display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+.pc-feat{font-size:14px;color:var(--text2);display:flex;align-items:center;gap:10px}
+.pc-feat::before{content:'✓';color:var(--accent);font-weight:800;font-size:11px;width:18px;height:18px;display:flex;align-items:center;justify-content:center;background:var(--accent-dim);border-radius:50%;flex-shrink:0}
+.pc-btn{display:block;padding:16px;border-radius:100px;font-weight:700;font-size:14px;text-align:center;transition:all .4s;cursor:pointer;font-family:var(--fb);text-decoration:none}
+.pc-fill{background:var(--accent);color:#fff;box-shadow:0 4px 16px var(--accent-glow)}.pc-fill:hover{background:var(--accent2);transform:translateY(-1px)}
+.pc-line{border:2px solid var(--border3);color:var(--text2);background:none}.pc-line:hover{border-color:var(--accent);color:var(--accent)}
+
+/* CTA */
+.btn-p{display:inline-flex;align-items:center;gap:10px;padding:17px 38px;background:var(--accent);color:#fff;border-radius:100px;font-weight:700;font-size:15px;transition:all .4s;box-shadow:0 4px 20px var(--accent-glow);border:none;cursor:pointer;font-family:var(--fb);position:relative;overflow:hidden}
+.btn-p::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.12),transparent)}
+.btn-p:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 10px 32px var(--accent-glow)}
+.btn-p svg{width:17px;height:17px}
+
+/* FOOTER */
+.footer{padding:80px 0 40px;border-top:1px solid var(--border);background:var(--surface);transition:all .4s}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:44px;margin-bottom:52px}
+.footer-brand{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.footer-brand-icon{width:32px;height:32px;border-radius:8px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;color:#fff}
+.footer-brand-text{font-weight:800;font-size:17px}
+.footer-desc{font-size:14px;color:var(--text3);line-height:1.7;max-width:280px;margin-bottom:16px}
+.footer-social{display:flex;gap:10px}
+.footer-social a{width:38px;height:38px;border-radius:10px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--text3);transition:all .3s}
+.footer-social a:hover{background:var(--accent-dim);border-color:var(--accent-mid);color:var(--accent)}
+.footer-social a.off{pointer-events:none;opacity:.3}
+.footer-title{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text2);margin-bottom:18px}
+.footer-link{display:block;font-size:14px;color:var(--text3);padding:5px 0;transition:color .3s}.footer-link:hover{color:var(--accent)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;border-top:1px solid var(--border)}
+.footer-copy{font-family:var(--fm);font-size:11px;color:var(--text4)}
+
+@media(max-width:1100px){.container{padding:0 36px}.nav-inner{padding:0 36px}.svc-grid{grid-template-columns:1fr}.proc-grid{grid-template-columns:1fr 1fr}.price-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.container{padding:0 20px}.nav-inner{padding:0 20px}.nav-links,.nav-hire{display:none}.hamburger{display:flex}.page-hero{padding:130px 0 60px}.proc-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}.footer-bottom{flex-direction:column;gap:14px;text-align:center}}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav"><div class="nav-inner">
+<a href="index.html" class="nav-logo"><div class="nav-logo-icon">G</div><span class="nav-logo-text">GEE.DEV</span></a>
+<ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="services.html" class="active">Services</a></li><li><a href="work.html">Work</a></li><li><a href="about.html">About</a></li></ul>
+<div class="nav-right"><button class="theme-btn" id="themeBtn" title="Toggle theme"><span class="theme-icon">🌙</span></button><a href="contact.html" class="nav-hire">Hire Me</a><button class="hamburger" id="burger"><span></span><span></span><span></span></button></div>
+</div></nav>
+
+<section class="page-hero"><div class="container">
+<div class="ph-tag" style="justify-content:center">What I Offer</div>
+<h1 class="ph-title">Services built to grow<br>your <em>business.</em></h1>
+<p class="ph-sub">Every project hand-coded from scratch. No templates, no page builders. Just clean, fast, modern code that works on every device.</p>
+</div></section>
+
+<section style="padding:0 0 100px"><div class="container"><div class="svc-grid">
+<div class="svc-card"><div class="svc-icon si-1">🌐</div><h3 class="svc-title">Websites & Landing Pages</h3><p class="svc-desc">Your website is your first impression. I build sites that look sharp, load fast, and guide visitors toward taking action — calling you, booking a service, or buying a product.</p><div class="svc-feats"><span class="svc-feat">Fully responsive on all devices</span><span class="svc-feat">SEO-friendly structure</span><span class="svc-feat">Contact forms and Google Maps</span><span class="svc-feat">Speed optimized for fast loading</span><span class="svc-feat">Social media integration</span></div><div class="svc-tags"><span class="tag">React</span><span class="tag">Next.js</span><span class="tag">HTML/CSS</span><span class="tag">JavaScript</span></div><div class="svc-price">Starting at <strong>$200</strong></div></div>
+
+<div class="svc-card"><div class="svc-icon si-2">⚡</div><h3 class="svc-title">Web Applications</h3><p class="svc-desc">Need more than a website? I build full-stack web apps with login systems, admin dashboards, APIs, and databases. Real software that runs your business.</p><div class="svc-feats"><span class="svc-feat">User authentication and accounts</span><span class="svc-feat">Admin dashboards with data views</span><span class="svc-feat">API integrations and databases</span><span class="svc-feat">Scalable architecture</span><span class="svc-feat">Real-time data updates</span></div><div class="svc-tags"><span class="tag">Node.js</span><span class="tag">Python</span><span class="tag">MongoDB</span><span class="tag">APIs</span></div><div class="svc-price">Starting at <strong>$800</strong></div></div>
+
+<div class="svc-card"><div class="svc-icon si-3">🛒</div><h3 class="svc-title">E-Commerce & Product Pages</h3><p class="svc-desc">Online stores and product pages designed to sell. Working cart systems, product galleries, color pickers, reviews — everything your customers need to click buy.</p><div class="svc-feats"><span class="svc-feat">Product catalogs with filtering</span><span class="svc-feat">Shopping cart functionality</span><span class="svc-feat">Payment gateway integration</span><span class="svc-feat">Conversion-optimized UX</span><span class="svc-feat">Customer review sections</span></div><div class="svc-tags"><span class="tag">Shopify</span><span class="tag">Custom Build</span><span class="tag">Stripe</span></div><div class="svc-price">Starting at <strong>$400</strong></div></div>
+
+<div class="svc-card"><div class="svc-icon si-4">🔧</div><h3 class="svc-title">Website Fixes & Redesigns</h3><p class="svc-desc">Broken layout? Slow loading? Looks like 2010? I fix bugs, improve speed, and redesign outdated sites to look modern and work properly on all devices.</p><div class="svc-feats"><span class="svc-feat">Bug fixes and error resolution</span><span class="svc-feat">Mobile responsiveness repairs</span><span class="svc-feat">Speed optimization</span><span class="svc-feat">Full visual redesigns</span><span class="svc-feat">WordPress and custom sites</span></div><div class="svc-tags"><span class="tag">WordPress</span><span class="tag">CSS/HTML</span><span class="tag">Debug</span><span class="tag">Performance</span></div><div class="svc-price">Starting at <strong>$40</strong></div></div>
+
+<div class="svc-card"><div class="svc-icon si-5">🛡️</div><h3 class="svc-title">Secure Development</h3><p class="svc-desc">Security isn't an add-on — it's built into everything I make. Input validation, secure authentication, HTTPS, and protection against common web vulnerabilities.</p><div class="svc-feats"><span class="svc-feat">OWASP security best practices</span><span class="svc-feat">Secure user authentication</span><span class="svc-feat">Data encryption and validation</span><span class="svc-feat">Regular security hardening</span></div><div class="svc-tags"><span class="tag">OWASP</span><span class="tag">Auth</span><span class="tag">SSL</span><span class="tag">Hardened</span></div><div class="svc-price">Included in <strong>every project</strong></div></div>
+
+<div class="svc-card"><div class="svc-icon si-6">📱</div><h3 class="svc-title">iOS Widgets & Automations</h3><p class="svc-desc">Custom iPhone home screen widgets with live data, beautiful design, and automated workflows. Data trackers, monitors, dashboards — built with Scriptable.</p><div class="svc-feats"><span class="svc-feat">Live data integration from APIs</span><span class="svc-feat">Premium gradient designs</span><span class="svc-feat">iOS Shortcuts automation</span><span class="svc-feat">Multiple widget sizes (S/M/L)</span></div><div class="svc-tags"><span class="tag">Scriptable</span><span class="tag">iOS Shortcuts</span><span class="tag">JavaScript</span></div><div class="svc-price">Starting at <strong>$50</strong></div></div>
+</div></div></section>
+
+<section style="padding:100px 0;background:var(--bg2);transition:background .4s"><div class="container">
+<div style="margin-bottom:60px"><div class="sh-tag">How I Work</div><h2 class="sh-title">From idea to <em>launch.</em></h2><p class="sh-desc">A simple, transparent process. You always know what's happening and when to expect delivery.</p></div>
+<div class="proc-grid">
+<div class="proc-card"><div class="proc-num">01</div><h3 class="proc-title">Discover</h3><p class="proc-desc">We talk about your business, your goals, and exactly what you need. I ask the right questions so I understand what to build and why.</p><div class="proc-time">Day 1</div></div>
+<div class="proc-card"><div class="proc-num">02</div><h3 class="proc-title">Design</h3><p class="proc-desc">I create the visual direction — layout, colors, typography, interactions. You see how it looks before development starts.</p><div class="proc-time">Day 2–3</div></div>
+<div class="proc-card"><div class="proc-num">03</div><h3 class="proc-title">Build</h3><p class="proc-desc">Clean, modern code. Performance optimized, fully responsive, security-first. You get a draft to review midway through.</p><div class="proc-time">Day 4–7</div></div>
+<div class="proc-card"><div class="proc-num">04</div><h3 class="proc-title">Launch</h3><p class="proc-desc">Final revisions, cross-browser testing, deployment. I hand over everything and make sure it runs perfectly. Post-launch support included.</p><div class="proc-time">Day 7–10</div></div>
+</div>
+</div></section>
+
+<section style="padding:100px 0"><div class="container">
+<div style="text-align:center;margin-bottom:8px"><div class="sh-tag" style="justify-content:center">Pricing</div><h2 class="sh-title" style="margin:0 auto">Transparent <em>pricing.</em></h2><p class="sh-desc" style="margin:16px auto 0;text-align:center">No hidden fees. No surprises. Every quote is clear and final before we start.</p></div>
+<div class="price-grid">
+<div class="price-card"><h3 class="pc-name">Starter</h3><div class="pc-price">$200<span> one-time</span></div><p class="pc-sub">Perfect for getting online fast</p><div class="pc-feats"><span class="pc-feat">Single-page landing page</span><span class="pc-feat">Mobile responsive</span><span class="pc-feat">Contact form</span><span class="pc-feat">Social media links</span><span class="pc-feat">3-day delivery</span><span class="pc-feat">1 revision</span></div><a href="contact.html" class="pc-btn pc-line">Get Started</a></div>
+<div class="price-card pop"><h3 class="pc-name">Business</h3><div class="pc-price">$400<span> one-time</span></div><p class="pc-sub">For businesses ready to grow</p><div class="pc-feats"><span class="pc-feat">Up to 5 pages</span><span class="pc-feat">Custom responsive design</span><span class="pc-feat">Contact forms + Google Maps</span><span class="pc-feat">SEO optimized</span><span class="pc-feat">Speed optimized</span><span class="pc-feat">7-day delivery</span><span class="pc-feat">3 revisions</span></div><a href="contact.html" class="pc-btn pc-fill">Get Started</a></div>
+<div class="price-card"><h3 class="pc-name">Premium</h3><div class="pc-price">$800<span>+</span></div><p class="pc-sub">Custom builds & complex apps</p><div class="pc-feats"><span class="pc-feat">Unlimited pages</span><span class="pc-feat">E-commerce / dashboards</span><span class="pc-feat">Custom functionality</span><span class="pc-feat">Database + API work</span><span class="pc-feat">Priority support</span><span class="pc-feat">Custom timeline</span><span class="pc-feat">Unlimited revisions</span></div><a href="contact.html" class="pc-btn pc-line">Let's Talk</a></div>
+</div>
+</div></section>
+
+<section style="padding:140px 0;text-align:center;position:relative;overflow:hidden"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:500px;background:radial-gradient(ellipse,var(--accent-dim),transparent 60%);pointer-events:none"></div><div class="container" style="position:relative">
+<h2 style="font-family:var(--fd);font-size:clamp(38px,5vw,56px);font-weight:300;margin-bottom:22px;letter-spacing:-.03em">Ready to get <em style="font-style:italic;color:var(--accent)">started?</em></h2>
+<p style="font-size:17px;color:var(--text2);max-width:460px;margin:0 auto 44px;line-height:1.85;font-weight:300">Tell me about your project and I'll get back to you with a clear quote within 24 hours.</p>
+<a href="contact.html" class="btn-p"><span>Start Your Project</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+</div></section>
+
+<footer class="footer"><div class="container">
+<div class="footer-grid">
+<div><div class="footer-brand"><div class="footer-brand-icon">G</div><span class="footer-brand-text">GEE.DEV</span></div><p class="footer-desc">Full-stack web developer building modern websites, apps, and iOS widgets that look premium and work flawlessly.</p><div class="footer-social"><a href="https://wa.me/2348125211436" target="_blank">💬</a><a href="#" class="off">𝕏</a><a href="#" class="off">📷</a></div></div>
+<div><div class="footer-title">Navigate</div><a href="index.html" class="footer-link">Home</a><a href="services.html" class="footer-link">Services</a><a href="work.html" class="footer-link">Work</a><a href="about.html" class="footer-link">About</a><a href="contact.html" class="footer-link">Contact</a></div>
+<div><div class="footer-title">Services</div><a href="services.html" class="footer-link">Website Design</a><a href="services.html" class="footer-link">Web Applications</a><a href="services.html" class="footer-link">E-Commerce</a><a href="services.html" class="footer-link">Website Fixes</a><a href="services.html" class="footer-link">iOS Widgets</a></div>
+<div><div class="footer-title">Contact</div><a href="mailto:studio.geedev@gmail.com" class="footer-link">studio.geedev@gmail.com</a><a href="https://wa.me/2348125211436" target="_blank" class="footer-link">WhatsApp Me</a><a href="contact.html" class="footer-link">Send a Message</a></div>
+</div>
+<div class="footer-bottom"><div class="footer-copy">© 2026 GEE.DEV. All rights reserved.</div></div>
+</div></footer>
+
+<script>
+(function(){'use strict';
+var n=document.getElementById('nav');
+window.addEventListener('scroll',function(){n.classList.toggle('scrolled',window.scrollY>50)});
+function getTheme(){return localStorage.getItem('geedev-theme')||'light'}
+function applyTheme(t){
+document.documentElement.setAttribute('data-theme',t);
+localStorage.setItem('geedev-theme',t);
+document.querySelectorAll('.theme-icon').forEach(function(el){el.textContent=t==='dark'?'☀️':'🌙'});
+}
+applyTheme(getTheme());
+document.getElementById('themeBtn').addEventListener('click',function(){applyTheme(getTheme()==='dark'?'light':'dark')});
+})();
+</script>
+</body>
+</html>
