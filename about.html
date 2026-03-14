@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — GEE.DEV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=Outfit:wght@200;300;400;500;600;700;800;900&family=Fragment+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.page-hero{padding:160px 0 80px;text-align:center}
+.page-hero-title{font-family:var(--fd);font-size:clamp(40px,5.5vw,64px);font-weight:300;line-height:1.05;letter-spacing:-.03em;margin-bottom:16px}
+.page-hero-title em{font-style:italic;background:linear-gradient(135deg,var(--accent),var(--mint));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.page-hero-sub{font-size:18px;color:var(--text2);max-width:560px;margin:0 auto;line-height:1.8;font-weight:300}
+
+/* STORY */
+.story-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:80px;align-items:center}
+.story-visual{aspect-ratio:3/4;border-radius:24px;background:var(--surface);border:1px solid var(--border);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.story-visual::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 40% 40%,rgba(129,140,248,.06),transparent 60%)}
+.story-visual-inner{position:relative;z-index:1;text-align:center}
+.story-avatar{width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--mint));display:flex;align-items:center;justify-content:center;font-size:48px;font-weight:900;color:#000;margin:0 auto 20px;box-shadow:0 12px 40px var(--accent-glow)}
+.story-visual-name{font-family:var(--fd);font-size:28px;font-weight:500;margin-bottom:4px}
+.story-visual-role{font-family:var(--fm);font-size:12px;color:var(--text3);letter-spacing:.1em;text-transform:uppercase}
+.story-content h2{font-family:var(--fd);font-size:clamp(28px,3.5vw,40px);font-weight:400;line-height:1.15;margin-bottom:24px}
+.story-content h2 em{font-style:italic;background:linear-gradient(135deg,var(--accent),var(--mint));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.story-text{font-size:16px;color:var(--text2);line-height:1.9;margin-bottom:20px;font-weight:300}
+.story-highlight{background:var(--surface);border-left:3px solid var(--accent);padding:20px 24px;border-radius:0 12px 12px 0;margin:28px 0;font-family:var(--fd);font-size:18px;font-style:italic;line-height:1.6;color:var(--text)}
+
+/* VALUES */
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;border-radius:var(--r);overflow:hidden}
+.value{background:var(--surface);padding:44px 36px;text-align:center;transition:all .5s var(--ease);position:relative;overflow:hidden}
+.value::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;opacity:0;transition:opacity .4s}
+.value:hover{background:var(--surface2)}.value:hover::before{opacity:1}
+.value:nth-child(1)::before{background:var(--accent)}.value:nth-child(2)::before{background:var(--mint)}.value:nth-child(3)::before{background:var(--orange)}
+.value-icon{font-size:32px;margin-bottom:20px}
+.value-title{font-weight:800;font-size:18px;margin-bottom:10px}
+.value-desc{font-size:14px;color:var(--text2);line-height:1.75;max-width:280px;margin:0 auto}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.skill-group{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:32px}
+.skill-group-title{font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.skill-group-title::before{content:'';width:8px;height:8px;border-radius:3px}
+.sg-frontend .skill-group-title::before{background:var(--accent)}
+.sg-backend .skill-group-title::before{background:var(--mint)}
+.sg-tools .skill-group-title::before{background:var(--orange)}
+.sg-mobile .skill-group-title::before{background:var(--pink)}
+.skill-items{display:flex;flex-wrap:wrap;gap:8px}
+.skill-item{padding:8px 18px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid var(--border);font-size:13px;font-weight:600;transition:all .3s}
+.skill-item:hover{border-color:var(--border-h);background:var(--accent-dim)}
+
+/* TECH STACK */
+.stack-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
+.stack-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:20px 14px;text-align:center;transition:all .4s var(--ease)}
+.stack-item:hover{border-color:var(--border-h);transform:translateY(-3px);background:var(--surface2)}
+.stack-icon{font-size:28px;margin-bottom:8px;display:block}
+.stack-name{font-size:12px;font-weight:700}
+.stack-sub{font-family:var(--fm);font-size:9px;color:var(--text3);margin-top:2px}
+
+/* STATS */
+.about-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-radius:var(--r);overflow:hidden;border:1px solid var(--border)}
+.as-item{padding:40px 24px;background:var(--surface);text-align:center;border-right:1px solid var(--border);transition:background .3s}
+.as-item:last-child{border-right:none}
+.as-item:hover{background:var(--surface2)}
+.as-val{font-size:36px;font-weight:900;letter-spacing:-.03em;margin-bottom:4px;background:linear-gradient(135deg,var(--accent),var(--mint));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.as-lbl{font-family:var(--fm);font-size:10px;color:var(--text3);letter-spacing:.12em;text-transform:uppercase}
+
+@media(max-width:1024px){.story-grid{grid-template-columns:1fr;gap:48px}.story-visual{max-width:360px;margin:0 auto}.skills-grid{grid-template-columns:1fr}.about-stats{grid-template-columns:1fr 1fr}.as-item:nth-child(2){border-right:none}.as-item:nth-child(1),.as-item:nth-child(2){border-bottom:1px solid var(--border)}}
+@media(max-width:768px){.page-hero{padding:140px 0 60px}.values-grid{grid-template-columns:1fr}.about-stats{grid-template-columns:1fr}.as-item{border-right:none;border-bottom:1px solid var(--border)}.as-item:last-child{border-bottom:none}.stack-grid{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<div class="ambient"></div>
+<div class="wrap page-enter">
+
+<nav class="nav" id="nav"><div class="nav-inner">
+<a href="index.html" class="nav-logo"><div class="nav-logo-icon">G</div><span class="nav-logo-text">GEE.DEV</span></a>
+<ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="services.html">Services</a></li><li><a href="work.html">Work</a></li><li><a href="about.html" class="active">About</a></li><li><a href="contact.html" class="nav-cta">Hire Me</a></li></ul>
+<button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+</div></nav>
+<div class="mobile-menu" id="mobileMenu"><button class="mobile-close" id="mobileClose">✕</button><a href="index.html">Home</a><a href="services.html">Services</a><a href="work.html">Work</a><a href="about.html" class="active">About</a><a href="contact.html">Hire Me</a></div>
+
+<section class="page-hero"><div class="container">
+<div class="sh-tag reveal" style="justify-content:center">About Me</div>
+<h1 class="page-hero-title reveal stagger-1">The person behind<br>the <em>code.</em></h1>
+<p class="page-hero-sub reveal stagger-2">A developer who cares about making things that actually work — and making them look incredible in the process.</p>
+</div></section>
+
+<!-- STORY -->
+<section class="section" style="padding-top:0"><div class="container">
+<div class="story-grid">
+<div class="story-visual reveal"><div class="story-visual-inner"><div class="story-avatar">G</div><div class="story-visual-name">Gee</div><div class="story-visual-role">Full-Stack Web Developer</div></div></div>
+<div class="story-content reveal stagger-1">
+<h2>I build things that<br>make businesses <em>grow.</em></h2>
+<p class="story-text">I'm a full-stack web developer with a deep focus on creating digital products that don't just look good — they perform. Every website, every app, every widget I build is designed to solve a real problem for a real business.</p>
+<p class="story-text">My background spans frontend and backend development, with a particular edge in security-conscious coding. I don't use templates or page builders. Every line of code is written by hand, optimized for speed, and built to last.</p>
+<div class="story-highlight">I believe your website should be your hardest-working employee — bringing in customers 24/7, building trust before you ever pick up the phone.</div>
+<p class="story-text">When I'm not building websites, I'm creating custom iOS widgets that push what's possible on iPhone home screens — live data, premium design, automated workflows. It's the intersection of utility and beauty that drives me.</p>
+<p class="story-text">I work remotely with clients across the US, UK, Canada, and Australia. Whether you're a restaurant owner in Houston or a startup founder in London — if you need something built right, let's talk.</p>
+</div>
+</div>
+</div></section>
+
+<!-- STATS -->
+<section style="padding:0 0 80px"><div class="container">
+<div class="about-stats reveal">
+<div class="as-item"><div class="as-val">50+</div><div class="as-lbl">Projects Delivered</div></div>
+<div class="as-item"><div class="as-val">100%</div><div class="as-lbl">Client Satisfaction</div></div>
+<div class="as-item"><div class="as-val">15+</div><div class="as-lbl">iOS Widgets Built</div></div>
+<div class="as-item"><div class="as-val">&lt;24hr</div><div class="as-lbl">Response Time</div></div>
+</div>
+</div></section>
+
+<!-- VALUES -->
+<section class="section" style="background:var(--bg2)"><div class="container">
+<div class="sh reveal" style="text-align:center"><div class="sh-tag" style="justify-content:center">What I Stand For</div><h2 class="sh-title" style="margin:0 auto">Values that guide<br>every <em>project.</em></h2></div>
+<div class="values-grid" style="margin-top:48px">
+<div class="value reveal"><div class="value-icon">⚡</div><h3 class="value-title">Quality Over Quantity</h3><p class="value-desc">I'd rather build one incredible website than five mediocre ones. Every project gets my full attention and best work.</p></div>
+<div class="value reveal stagger-1"><div class="value-icon">🤝</div><h3 class="value-title">Clear Communication</h3><p class="value-desc">No jargon, no disappearing acts. I keep you updated throughout the process and I respond fast — always.</p></div>
+<div class="value reveal stagger-2"><div class="value-icon">🎯</div><h3 class="value-title">Results That Matter</h3><p class="value-desc">A beautiful website means nothing if it doesn't bring in customers. I build with conversion and business growth in mind.</p></div>
+</div>
+</div></section>
+
+<!-- SKILLS -->
+<section class="section"><div class="container">
+<div class="sh reveal"><div class="sh-tag">Skills & Expertise</div><h2 class="sh-title">What I work <em>with.</em></h2></div>
+<div class="skills-grid" style="margin-bottom:48px">
+<div class="skill-group sg-frontend reveal"><div class="skill-group-title">Frontend</div><div class="skill-items"><span class="skill-item">React</span><span class="skill-item">Next.js</span><span class="skill-item">JavaScript</span><span class="skill-item">TypeScript</span><span class="skill-item">HTML5</span><span class="skill-item">CSS3</span><span class="skill-item">Tailwind CSS</span><span class="skill-item">Responsive Design</span><span class="skill-item">Animations</span></div></div>
+<div class="skill-group sg-backend reveal stagger-1"><div class="skill-group-title">Backend</div><div class="skill-items"><span class="skill-item">Node.js</span><span class="skill-item">Python</span><span class="skill-item">PHP</span><span class="skill-item">REST APIs</span><span class="skill-item">MongoDB</span><span class="skill-item">PostgreSQL</span><span class="skill-item">Express</span><span class="skill-item">Authentication</span></div></div>
+<div class="skill-group sg-tools reveal"><div class="skill-group-title">Tools & Platforms</div><div class="skill-items"><span class="skill-item">Git / GitHub</span><span class="skill-item">VS Code</span><span class="skill-item">Figma</span><span class="skill-item">Vercel</span><span class="skill-item">Netlify</span><span class="skill-item">Docker</span><span class="skill-item">WordPress</span><span class="skill-item">Linux</span></div></div>
+<div class="skill-group sg-mobile reveal stagger-1"><div class="skill-group-title">Mobile & Widgets</div><div class="skill-items"><span class="skill-item">Scriptable</span><span class="skill-item">iOS Shortcuts</span><span class="skill-item">Widget Design</span><span class="skill-item">API Integration</span><span class="skill-item">Automation</span><span class="skill-item">SMS Parsing</span></div></div>
+</div>
+
+<div class="sh reveal"><div class="sh-tag">Tech Stack</div><h2 class="sh-title">Technologies I <em>use.</em></h2></div>
+<div class="stack-grid reveal">
+<div class="stack-item"><span class="stack-icon">⚛️</span><div class="stack-name">React</div><div class="stack-sub">Frontend</div></div>
+<div class="stack-item"><span class="stack-icon">▲</span><div class="stack-name">Next.js</div><div class="stack-sub">Framework</div></div>
+<div class="stack-item"><span class="stack-icon">📜</span><div class="stack-name">JavaScript</div><div class="stack-sub">Language</div></div>
+<div class="stack-item"><span class="stack-icon">🎨</span><div class="stack-name">HTML/CSS</div><div class="stack-sub">Markup</div></div>
+<div class="stack-item"><span class="stack-icon">🟢</span><div class="stack-name">Node.js</div><div class="stack-sub">Backend</div></div>
+<div class="stack-item"><span class="stack-icon">🐍</span><div class="stack-name">Python</div><div class="stack-sub">Backend</div></div>
+<div class="stack-item"><span class="stack-icon">🐘</span><div class="stack-name">PHP</div><div class="stack-sub">Backend</div></div>
+<div class="stack-item"><span class="stack-icon">💨</span><div class="stack-name">Tailwind</div><div class="stack-sub">CSS</div></div>
+<div class="stack-item"><span class="stack-icon">🍃</span><div class="stack-name">MongoDB</div><div class="stack-sub">Database</div></div>
+<div class="stack-item"><span class="stack-icon">🐘</span><div class="stack-name">PostgreSQL</div><div class="stack-sub">Database</div></div>
+<div class="stack-item"><span class="stack-icon">🔗</span><div class="stack-name">REST APIs</div><div class="stack-sub">Integration</div></div>
+<div class="stack-item"><span class="stack-icon">📱</span><div class="stack-name">Scriptable</div><div class="stack-sub">iOS Widgets</div></div>
+<div class="stack-item"><span class="stack-icon">🔀</span><div class="stack-name">Git</div><div class="stack-sub">Version Control</div></div>
+<div class="stack-item"><span class="stack-icon">🐳</span><div class="stack-name">Docker</div><div class="stack-sub">DevOps</div></div>
+<div class="stack-item"><span class="stack-icon">🎯</span><div class="stack-name">Figma</div><div class="stack-sub">Design</div></div>
+<div class="stack-item"><span class="stack-icon">⚡</span><div class="stack-name">Vercel</div><div class="stack-sub">Hosting</div></div>
+</div>
+</div></section>
+
+<!-- CTA -->
+<section style="padding:120px 0;text-align:center;position:relative;overflow:hidden"><div class="container">
+<div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(129,140,248,.04) 0%,transparent 55%);pointer-events:none"></div>
+<h2 style="font-family:var(--fd);font-size:clamp(36px,4.5vw,52px);font-weight:300;margin-bottom:20px;letter-spacing:-.03em;position:relative" class="reveal">Want to work <em style="font-style:italic;background:linear-gradient(135deg,var(--accent),var(--mint));-webkit-background-clip:text;-webkit-text-fill-color:transparent">together?</em></h2>
+<p style="font-size:17px;color:var(--text2);max-width:440px;margin:0 auto 40px;line-height:1.8;font-weight:300;position:relative" class="reveal stagger-1">I'm always open to new projects and collaborations. Let's build something that makes an impact.</p>
+<a href="contact.html" class="btn-p reveal stagger-2" style="position:relative"><span>Get In Touch</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+</div></section>
+
+<footer class="footer"><div class="container">
+<div class="footer-grid">
+<div><div class="footer-brand"><div class="footer-brand-icon">G</div> GEE.DEV</div><p class="footer-desc">Full-stack web developer building modern websites, apps, and iOS widgets that look premium and work flawlessly.</p><div class="footer-social"><a href="#">𝕏</a><a href="#">in</a><a href="#">GH</a></div></div>
+<div><div class="footer-title">Navigate</div><a href="index.html" class="footer-link">Home</a><a href="services.html" class="footer-link">Services</a><a href="work.html" class="footer-link">Work</a><a href="about.html" class="footer-link">About</a><a href="contact.html" class="footer-link">Contact</a></div>
+<div><div class="footer-title">Services</div><a href="services.html" class="footer-link">Website Design</a><a href="services.html" class="footer-link">Web Applications</a><a href="services.html" class="footer-link">E-Commerce</a><a href="services.html" class="footer-link">Website Fixes</a><a href="services.html" class="footer-link">iOS Widgets</a></div>
+<div><div class="footer-title">Contact</div><a href="mailto:geedev.works@gmail.com" class="footer-link">geedev.works@gmail.com</a><a href="contact.html" class="footer-link">Send a Message</a><a href="#" class="footer-link">Fiverr</a><a href="#" class="footer-link">Upwork</a></div>
+</div>
+<div class="footer-bottom"><div class="footer-copy">&copy; 2026 GEE.DEV. All rights reserved.</div><div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a></div></div>
+</div></footer>
+</div>
+<script>
+(function(){'use strict';
+var n=document.getElementById('nav');window.addEventListener('scroll',function(){n.classList.toggle('scrolled',window.scrollY>60)});
+var toggle=document.getElementById('navToggle'),menu=document.getElementById('mobileMenu'),close=document.getElementById('mobileClose');
+if(toggle&&menu){toggle.addEventListener('click',function(){menu.classList.add('open')});close.addEventListener('click',function(){menu.classList.remove('open')});menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){menu.classList.remove('open')})})}
+var reveals=document.querySelectorAll('.reveal,.reveal-left');var observer=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:0.06,rootMargin:'0px 0px -40px 0px'});reveals.forEach(function(el){observer.observe(el)});
+document.addEventListener('contextmenu',function(e){e.preventDefault()});document.addEventListener('keydown',function(e){if(e.key==='F12'||(e.ctrlKey&&e.shiftKey&&(e.key==='I'||e.key==='J'||e.key==='C'))||(e.ctrlKey&&e.key==='u'))e.preventDefault()});
+})();
+</script>
+</body>
+</html>
