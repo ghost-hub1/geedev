@@ -52,6 +52,8 @@
     ];
 
     var h = '';
+    // Close button at top
+    h += '<div id="mobClose" style="position:absolute;top:24px;right:24px;width:48px;height:48px;border-radius:50%;border:2px solid ' + bd + ';background:' + cd + ';cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:22px;color:' + tx + ';font-weight:300;font-family:Outfit,sans-serif">&times;</div>';
     for(var i = 0; i < pages.length; i++){
       var p = pages[i];
       var isActive = p[2];
@@ -82,6 +84,17 @@
           document.documentElement.setAttribute('data-theme', newTheme);
           localStorage.setItem('geedev-theme', newTheme);
         }
+        buildMenu();
+      });
+    }
+
+    // Attach close button click
+    var closeBtn = document.getElementById('mobClose');
+    if(closeBtn){
+      closeBtn.addEventListener('click', function(){
+        menuOpen = false;
+        burger.classList.remove('active');
+        document.body.style.overflow = '';
         buildMenu();
       });
     }
