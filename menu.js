@@ -1,29 +1,71 @@
 /*
-  GEE.DEV - Universal Mobile Menu v3
-  Fixes: blank page on close, old overlay conflicts
-  Add to each page: <script src="menu.js"></script>
+  GEE.DEV - Universal Mobile Menu + Performance Fix v4
 */
 (function(){
 
-  // === STEP 1: KILL OLD MOBILE MENUS ===
-  // Index and Contact pages have old overlay divs that conflict
+  // === PERFORMANCE FIX: Remove heavy animations causing device heating ===
+  
+  // Kill ambient orbs (large blurred divs animating constantly = GPU killer)
+  var ambients = document.querySelectorAll('.ambient, .ambient-orb, .orb, .orb-1, .orb-2, .orb-3');
+  for(var i = 0; i < ambients.length; i++){
+    ambients[i].parentNode.removeChild(ambients[i]);
+  }
+  
+  // Kill grain overlay (body::after with SVG noise = constant repaint)
+  var killGrain = document.createElement('style');
+  killGrain.textContent = 'body::after{display:none!important}';
+  document.head.appendChild(killGrain);
+
+  // Pause marquee when not visible (saves CPU)
+  var marquee = document.querySelector('.marquee-track');
+  if(marquee){
+    var marqueePaused = false;
+    var marqueeObs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        marquee.style.animationPlayState = e.isIntersecting ? 'running' : 'paused';
+      });
+    });
+    marqueeObs.observe(marquee.parentElement || marquee);
+  }
+
+  // === KILL OLD MOBILE MENUS ===
   var oldOverlays = document.querySelectorAll('.mobile-overlay, .mobile-nav, #mobileOverlay, #mobileMenu, #mobileNav');
   for(var i = 0; i < oldOverlays.length; i++){
     oldOverlays[i].parentNode.removeChild(oldOverlays[i]);
   }
 
-  // === STEP 2: CREATE FRESH MOB DIV ===
+  // === FRESH MOB DIV ===
   var existingMob = document.getElementById('mob');
   if(existingMob) existingMob.parentNode.removeChild(existingMob);
   var menuEl = document.createElement('div');
   menuEl.id = 'mob';
   document.body.appendChild(menuEl);
 
-  // === STEP 3: CLONE BURGER TO STRIP OLD EVENT LISTENERS ===
+  // === CLONE BURGER TO STRIP OLD EVENT LISTENERS ===
   var oldBurger = document.getElementById('burger');
   if(!oldBurger) return;
   var burger = oldBurger.cloneNode(true);
   oldBurger.parentNode.replaceChild(burger, oldBurger);
+
+  // === NAV FIX: Force background directly via inline style ===
+  var navEl = document.getElementById('nav') || document.querySelector('.nav');
+  if(navEl){
+    // Remove transition:all which fights our fix
+    navEl.style.transition = 'padding 0.4s, box-shadow 0.3s';
+    
+    var forceNavBg = function(){
+      var dk = (localStorage.getItem('geedev-theme') || 'light') === 'dark';
+      navEl.style.background = dk ? 'rgba(14,13,16,.95)' : 'rgba(250,248,245,.95)';
+      navEl.style.backdropFilter = 'blur(24px)';
+      navEl.style.webkitBackdropFilter = 'blur(24px)';
+      navEl.style.borderBottom = dk ? '1px solid rgba(255,255,255,.05)' : '1px solid rgba(0,0,0,.06)';
+    };
+    forceNavBg();
+    // Keep forcing it on scroll - runs AFTER page's own scroll handler
+    window.addEventListener('scroll', function(){ setTimeout(forceNavBg, 10); }, true);
+    // Force on theme change
+    new MutationObserver(function(){ forceNavBg(); }).observe(document.documentElement, { attributes: true });
+  }
 
   // === DETECT CURRENT PAGE ===
   var path = window.location.pathname;
@@ -64,11 +106,8 @@
     ];
 
     var h = '';
-
-    // Close button
     h += '<div id="mobClose" style="position:absolute;top:24px;right:24px;width:48px;height:48px;border-radius:50%;border:2px solid ' + bd + ';background:' + cd + ';cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:22px;color:' + tx + ';font-weight:300;font-family:Outfit,sans-serif">&times;</div>';
 
-    // Page links
     for(var i = 0; i < pages.length; i++){
       var p = pages[i];
       var isActive = p[2];
@@ -78,37 +117,26 @@
       h += '<a href="' + p[1] + '" style="display:block;font-size:22px;font-weight:800;padding:18px 40px;color:' + color + ';border-radius:16px;width:280px;text-align:center;background:' + bgColor + ';border:2px solid ' + border + ';text-decoration:none;font-family:Outfit,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.05)">' + p[0] + '</a>';
     }
 
-    // Hire Me
     h += '<a href="contact.html" style="display:block;margin-top:12px;padding:18px 40px;background:' + ac + ';color:#fff;border-radius:100px;font-weight:800;font-size:18px;width:280px;text-align:center;text-decoration:none;font-family:Outfit,sans-serif;border:none;box-shadow:0 6px 24px rgba(0,0,0,.1)">Hire Me</a>';
 
-    // Theme toggle
     h += '<div id="mobTheme" style="margin-top:16px;width:auto;padding:12px 28px;border-radius:100px;border:2px solid ' + bd + ';background:' + cd + ';cursor:pointer;font-size:14px;font-weight:700;color:' + tx + ';display:flex;align-items:center;justify-content:center;font-family:Outfit,sans-serif">' + (dk ? 'Switch to Light' : 'Switch to Dark') + '</div>';
 
     menuEl.innerHTML = h;
 
-    // Attach close button
-    var closeBtn = document.getElementById('mobClose');
-    if(closeBtn){
-      closeBtn.addEventListener('click', closeMenu);
-    }
+    document.getElementById('mobClose').addEventListener('click', closeMenu);
 
-    // Attach theme toggle
-    var themeBtn = document.getElementById('mobTheme');
-    if(themeBtn){
-      themeBtn.addEventListener('click', function(){
-        var newTheme = getTheme() === 'dark' ? 'light' : 'dark';
-        if(typeof window.applyTheme === 'function'){
-          window.applyTheme(newTheme);
-        } else {
-          document.documentElement.setAttribute('data-theme', newTheme);
-          localStorage.setItem('geedev-theme', newTheme);
-        }
-        buildMenu();
-      });
-    }
+    document.getElementById('mobTheme').addEventListener('click', function(){
+      var newTheme = getTheme() === 'dark' ? 'light' : 'dark';
+      if(typeof window.applyTheme === 'function'){
+        window.applyTheme(newTheme);
+      } else {
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('geedev-theme', newTheme);
+      }
+      buildMenu();
+    });
   }
 
-  // === BURGER CLICK (only handler now, old ones are gone) ===
   burger.addEventListener('click', function(e){
     e.stopPropagation();
     menuOpen = !menuOpen;
@@ -117,56 +145,27 @@
     buildMenu();
   });
 
-  // Rebuild when theme changes externally
-  var observer = new MutationObserver(function(mutations){
+  new MutationObserver(function(mutations){
     mutations.forEach(function(m){
       if(m.attributeName === 'data-theme') buildMenu();
     });
-  });
-  observer.observe(document.documentElement, { attributes: true });
+  }).observe(document.documentElement, { attributes: true });
 
-  // Initial build (hidden)
   buildMenu();
 
-  // === INJECT CSS FIXES ===
+  // === CSS FIXES ===
   var style = document.createElement('style');
   style.textContent = [
-    // Hamburger X animation
     '.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}',
     '.hamburger.active span:nth-child(2){opacity:0;transform:scaleX(0)}',
     '.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}',
-    // Grain behind everything
-    'body::after{z-index:0!important}',
-    // Fix available badge - FULLY GREEN (dot, border, text, background)
-    '.hero-badge,.hero-badge-dot,.badge-dot,.hero-badge-text,.badge-text{border-color:rgba(46,125,50,.2)!important}',
     '.hero-badge{background:rgba(46,125,50,.06)!important;border:1px solid rgba(46,125,50,.2)!important}',
     '.hero-badge-dot,.badge-dot{background:#2e7d32!important}',
     '.hero-badge-dot::after,.badge-dot::after{border-color:#2e7d32!important}',
-    '.hero-badge-text,.badge-text{color:#2e7d32!important}'
+    '.hero-badge-text,.badge-text{color:#2e7d32!important}',
+    '@keyframes pingDot{0%,100%{opacity:0;transform:scale(.8)}50%{opacity:.5;transform:scale(1.4)}}',
+    '.hero-badge-dot::after,.badge-dot::after{animation:pingDot 2s ease-in-out infinite!important}'
   ].join('');
   document.head.appendChild(style);
-
-  // === NAV ALWAYS VISIBLE FIX (JS-based, not CSS) ===
-  // Directly force the nav to always have background via inline styles
-  var navEl = document.getElementById('nav') || document.querySelector('.nav');
-  if(navEl){
-    // Set inline styles that override everything
-    var applyNavBg = function(){
-      var dk = getTheme() === 'dark';
-      var bg = dk ? 'rgba(14,13,16,.92)' : 'rgba(250,248,245,.92)';
-      var border = dk ? 'rgba(255,255,255,.05)' : 'rgba(0,0,0,.06)';
-      navEl.style.background = bg;
-      navEl.style.backdropFilter = 'blur(24px)';
-      navEl.style.webkitBackdropFilter = 'blur(24px)';
-      navEl.style.borderBottom = '1px solid ' + border;
-    };
-    // Apply immediately
-    applyNavBg();
-    // Re-apply on scroll (in case page JS tries to remove it)
-    window.addEventListener('scroll', applyNavBg);
-    // Re-apply on theme change
-    var navObserver = new MutationObserver(function(){ applyNavBg(); });
-    navObserver.observe(document.documentElement, { attributes: true });
-  }
 
 })();
