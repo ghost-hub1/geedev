@@ -135,14 +135,38 @@
     '.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}',
     '.hamburger.active span:nth-child(2){opacity:0;transform:scaleX(0)}',
     '.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}',
-    // Nav always visible
-    '.nav{background:var(--nav-bg)!important;backdrop-filter:blur(24px)!important;-webkit-backdrop-filter:blur(24px)!important;border-bottom:1px solid var(--border)!important}',
     // Grain behind everything
     'body::after{z-index:0!important}',
-    // Fix available badge to be GREEN not red
+    // Fix available badge - FULLY GREEN (dot, border, text, background)
+    '.hero-badge,.hero-badge-dot,.badge-dot,.hero-badge-text,.badge-text{border-color:rgba(46,125,50,.2)!important}',
+    '.hero-badge{background:rgba(46,125,50,.06)!important;border:1px solid rgba(46,125,50,.2)!important}',
     '.hero-badge-dot,.badge-dot{background:#2e7d32!important}',
-    '.hero-badge-dot::after,.badge-dot::after{border-color:#2e7d32!important}'
+    '.hero-badge-dot::after,.badge-dot::after{border-color:#2e7d32!important}',
+    '.hero-badge-text,.badge-text{color:#2e7d32!important}'
   ].join('');
   document.head.appendChild(style);
+
+  // === NAV ALWAYS VISIBLE FIX (JS-based, not CSS) ===
+  // Directly force the nav to always have background via inline styles
+  var navEl = document.getElementById('nav') || document.querySelector('.nav');
+  if(navEl){
+    // Set inline styles that override everything
+    var applyNavBg = function(){
+      var dk = getTheme() === 'dark';
+      var bg = dk ? 'rgba(14,13,16,.92)' : 'rgba(250,248,245,.92)';
+      var border = dk ? 'rgba(255,255,255,.05)' : 'rgba(0,0,0,.06)';
+      navEl.style.background = bg;
+      navEl.style.backdropFilter = 'blur(24px)';
+      navEl.style.webkitBackdropFilter = 'blur(24px)';
+      navEl.style.borderBottom = '1px solid ' + border;
+    };
+    // Apply immediately
+    applyNavBg();
+    // Re-apply on scroll (in case page JS tries to remove it)
+    window.addEventListener('scroll', applyNavBg);
+    // Re-apply on theme change
+    var navObserver = new MutationObserver(function(){ applyNavBg(); });
+    navObserver.observe(document.documentElement, { attributes: true });
+  }
 
 })();
