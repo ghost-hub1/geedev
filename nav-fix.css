@@ -1,0 +1,18 @@
+/* GEE.DEV Nav Fix - Forces solid background, removes backdrop-filter flicker */
+.nav {
+  background: #faf8f5 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-bottom: 1px solid rgba(0,0,0,.06) !important;
+  transition: padding .4s, box-shadow .3s !important;
+}
+.nav.scrolled {
+  box-shadow: 0 2px 8px rgba(0,0,0,.04) !important;
+}
+[data-theme="dark"] .nav {
+  background: #0e0d10 !important;
+  border-bottom: 1px solid rgba(255,255,255,.05) !important;
+}
+[data-theme="dark"] .nav.scrolled {
+  box-shadow: 0 2px 8px rgba(0,0,0,.15) !important;
+}
